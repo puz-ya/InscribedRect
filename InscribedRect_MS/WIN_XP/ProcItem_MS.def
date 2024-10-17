@@ -1,0 +1,6 @@
+LIBRARY      "InscribedRect_MS"
+
+EXPORTS
+	CreateProcItem
+	DeleteProcItem
+

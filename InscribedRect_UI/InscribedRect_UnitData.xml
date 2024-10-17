@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Reference>
+  <UNITDATA>
+
+    <judge no="0" ident="judge" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+
+    <overallJudge no="103" ident="overallJudge" setEnable="1" getEnable="" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="1" outputParam="" isGroup="">
+      <setting Type="ProcItemDialog.ComboBoxDialog" MessageFileIdent="InscribedRect" TextIdentList="Flow_ON:Flow_OFF" ValueList="0:1" />
+    </overallJudge>
+    <overallJudge no="103" ident="overallJudge" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+
+    <mode no="200" ident="mode" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    <angle no="201" ident="angle" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+
+    <x1 no="1000" ident="x1" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    <y1 no="1001" ident="y1" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+
+    <x2 no="1002" ident="x2" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    <y2 no="1003" ident="y2" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+
+    <x3 no="1004" ident="x3" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    <y3 no="1005" ident="y3" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+
+    <x4 no="1006" ident="x4" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    <y4 no="1007" ident="y4" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+
+    <area no="1010" ident="area" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    <width no="1011" ident="width" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    <height no="1012" ident="height" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    <center_x no="1013" ident="center_x" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    <center_y no="1014" ident="center_y" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    
+  </UNITDATA>
+</Reference>
