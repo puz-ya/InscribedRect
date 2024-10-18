@@ -49,11 +49,21 @@ Partial Class NormalForm
         Me.rdoColorIN = New FZ_CustomControl.RadioButtonEx()
         Me.rdoColorOUT = New FZ_CustomControl.RadioButtonEx()
         Me.stdsetReference = New FZ_CustomControl.StandardSet()
+        Me.nmb_mode02_angle_skip = New FZ_CustomControl.NumericBox()
+        Me.grp_mode02 = New FZ_CustomControl.GroupPanel()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.nmb_mode02_scale_step = New FZ_CustomControl.NumericBox()
+        Me.grp_mode01 = New FZ_CustomControl.GroupPanel()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.nmb_mode01_angle_skip = New FZ_CustomControl.NumericBox()
         Me.tabOutputParameter.SuspendLayout()
         Me.grpTotalJudge.SuspendLayout()
         Me.tcNormal.SuspendLayout()
         Me.tabFigureSet.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
+        Me.grp_mode02.SuspendLayout()
+        Me.grp_mode01.SuspendLayout()
         Me.SuspendLayout()
         '
         'tsbNormal
@@ -165,6 +175,8 @@ Partial Class NormalForm
         'tabFigureSet
         '
         Me.tabFigureSet.BackColor = System.Drawing.SystemColors.Control
+        Me.tabFigureSet.Controls.Add(Me.grp_mode01)
+        Me.tabFigureSet.Controls.Add(Me.grp_mode02)
         Me.tabFigureSet.Controls.Add(Me.Label6)
         Me.tabFigureSet.Controls.Add(Me.cmb_mode)
         Me.tabFigureSet.Controls.Add(Me.GroupPanel1)
@@ -184,7 +196,7 @@ Partial Class NormalForm
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(19, 28)
+        Me.Label6.Location = New System.Drawing.Point(21, 28)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(42, 14)
         Me.Label6.TabIndex = 33
@@ -194,10 +206,11 @@ Partial Class NormalForm
         '
         Me.cmb_mode.DataIdent = ""
         Me.cmb_mode.DataType = FZ_CustomControl.DATATYPE.None
+        Me.cmb_mode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmb_mode.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cmb_mode.Font = New System.Drawing.Font("MS Gothic", 10.0!)
         Me.cmb_mode.FormattingEnabled = True
-        Me.cmb_mode.Items.AddRange(New Object() {"Non Convex Poly"})
+        Me.cmb_mode.Items.AddRange(New Object() {"Mode01: Non Convex Poly", "Mode02: Scale and Rotate Rect"})
         Me.cmb_mode.Location = New System.Drawing.Point(122, 28)
         Me.cmb_mode.Name = "cmb_mode"
         Me.cmb_mode.RefreshWindow = Nothing
@@ -219,14 +232,14 @@ Partial Class NormalForm
         Me.GroupPanel1.Controls.Add(Me.cmb_edge3)
         Me.GroupPanel1.FrameColor = System.Drawing.Color.RoyalBlue
         Me.GroupPanel1.FrameWidth = 2
-        Me.GroupPanel1.Location = New System.Drawing.Point(25, 301)
+        Me.GroupPanel1.Location = New System.Drawing.Point(22, 445)
         Me.GroupPanel1.Name = "GroupPanel1"
         Me.GroupPanel1.Size = New System.Drawing.Size(334, 184)
         Me.GroupPanel1.TabIndex = 37
         Me.GroupPanel1.TextIdent = ""
         Me.GroupPanel1.TitleColor = System.Drawing.Color.Black
         Me.GroupPanel1.TitleFont = New System.Drawing.Font("MS Gothic", 10.0!)
-        Me.GroupPanel1.TitleText = ""
+        Me.GroupPanel1.TitleText = "HIDDEN"
         Me.GroupPanel1.TransparentBackground = False
         Me.GroupPanel1.Visible = False
         '
@@ -236,7 +249,7 @@ Partial Class NormalForm
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(237, 14)
         Me.Label5.TabIndex = 32
-        Me.Label5.Text = "Select Scan Edge Position units:"
+        Me.Label5.Text = "HIDDEN Select Scan Edge Position units:"
         '
         'cmb_edge0
         '
@@ -346,7 +359,7 @@ Partial Class NormalForm
         Me.sls_angle.DecimalDigits = 0
         Me.sls_angle.Interval = 100
         Me.sls_angle.LargeChange = 10.0R
-        Me.sls_angle.Location = New System.Drawing.Point(22, 87)
+        Me.sls_angle.Location = New System.Drawing.Point(22, 58)
         Me.sls_angle.MaxValue = 90.0R
         Me.sls_angle.Measurement = 0R
         Me.sls_angle.MinValue = 0R
@@ -363,7 +376,7 @@ Partial Class NormalForm
         Me.sls_angle.TextIdent = ""
         Me.sls_angle.TickFrequency = 10.0R
         Me.sls_angle.TickStyle = System.Windows.Forms.TickStyle.BottomRight
-        Me.sls_angle.Title = "Max angle:"
+        Me.sls_angle.Title = "Max angle (+/-) [0; 90]:"
         Me.sls_angle.TrackBarOnly = False
         Me.sls_angle.TransparentBackground = True
         Me.sls_angle.UnitNo = -1
@@ -371,11 +384,11 @@ Partial Class NormalForm
         'Label7
         '
         Me.Label7.Font = New System.Drawing.Font("MS Gothic", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.Label7.Location = New System.Drawing.Point(19, 161)
+        Me.Label7.Location = New System.Drawing.Point(19, 134)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(337, 30)
+        Me.Label7.Size = New System.Drawing.Size(320, 30)
         Me.Label7.TabIndex = 34
-        Me.Label7.Text = "It takes 3 sec (!) for 640x480 px image and just 3 degree checks!"
+        Me.Label7.Text = "It takes 3 sec (!) for 640x480 px image and just 5 degree checks!"
         '
         'btnHelp
         '
@@ -614,6 +627,138 @@ Partial Class NormalForm
         Me.stdsetReference.TransparentBackground = True
         Me.stdsetReference.UnitNo = -1
         '
+        'nmb_mode02_angle_skip
+        '
+        Me.nmb_mode02_angle_skip.BackColor = System.Drawing.Color.White
+        Me.nmb_mode02_angle_skip.DataIdent = ""
+        Me.nmb_mode02_angle_skip.DataType = FZ_CustomControl.DATATYPE.None
+        Me.nmb_mode02_angle_skip.DecimalDigits = 0
+        Me.nmb_mode02_angle_skip.Font = New System.Drawing.Font("MS Gothic", 10.0!)
+        Me.nmb_mode02_angle_skip.ForeColor = System.Drawing.Color.Black
+        Me.nmb_mode02_angle_skip.Location = New System.Drawing.Point(183, 26)
+        Me.nmb_mode02_angle_skip.MaxValue = 90.0R
+        Me.nmb_mode02_angle_skip.Measurement = 0R
+        Me.nmb_mode02_angle_skip.MinValue = 0R
+        Me.nmb_mode02_angle_skip.Name = "nmb_mode02_angle_skip"
+        Me.nmb_mode02_angle_skip.RefreshWindow = Nothing
+        Me.nmb_mode02_angle_skip.Size = New System.Drawing.Size(120, 20)
+        Me.nmb_mode02_angle_skip.StopChangeEvent = True
+        Me.nmb_mode02_angle_skip.TabIndex = 38
+        Me.nmb_mode02_angle_skip.Text = "NumericBox1"
+        Me.nmb_mode02_angle_skip.TextIdent = ""
+        Me.nmb_mode02_angle_skip.TransparentBackground = False
+        Me.nmb_mode02_angle_skip.UnitNo = -1
+        Me.nmb_mode02_angle_skip.Value = 0R
+        '
+        'grp_mode02
+        '
+        Me.grp_mode02.Controls.Add(Me.nmb_mode02_scale_step)
+        Me.grp_mode02.Controls.Add(Me.Label9)
+        Me.grp_mode02.Controls.Add(Me.Label8)
+        Me.grp_mode02.Controls.Add(Me.nmb_mode02_angle_skip)
+        Me.grp_mode02.FrameColor = System.Drawing.Color.RoyalBlue
+        Me.grp_mode02.FrameWidth = 2
+        Me.grp_mode02.Location = New System.Drawing.Point(22, 261)
+        Me.grp_mode02.Name = "grp_mode02"
+        Me.grp_mode02.Size = New System.Drawing.Size(323, 100)
+        Me.grp_mode02.TabIndex = 39
+        Me.grp_mode02.TextIdent = ""
+        Me.grp_mode02.TitleColor = System.Drawing.Color.Black
+        Me.grp_mode02.TitleFont = New System.Drawing.Font("MS Gothic", 10.0!)
+        Me.grp_mode02.TitleText = "Mode02"
+        Me.grp_mode02.TransparentBackground = False
+        Me.grp_mode02.Visible = False
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(19, 32)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(84, 14)
+        Me.Label8.TabIndex = 39
+        Me.Label8.Text = "Angle skip:"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(19, 60)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(168, 14)
+        Me.Label9.TabIndex = 40
+        Me.Label9.Text = "Scale step [0.1; 0.99]:"
+        '
+        'nmb_mode02_scale_step
+        '
+        Me.nmb_mode02_scale_step.BackColor = System.Drawing.Color.White
+        Me.nmb_mode02_scale_step.DataIdent = ""
+        Me.nmb_mode02_scale_step.DataType = FZ_CustomControl.DATATYPE.None
+        Me.nmb_mode02_scale_step.DecimalDigits = 2
+        Me.nmb_mode02_scale_step.Font = New System.Drawing.Font("MS Gothic", 10.0!)
+        Me.nmb_mode02_scale_step.ForeColor = System.Drawing.Color.Black
+        Me.nmb_mode02_scale_step.Location = New System.Drawing.Point(183, 54)
+        Me.nmb_mode02_scale_step.MaxValue = 0.99R
+        Me.nmb_mode02_scale_step.Measurement = 0.05R
+        Me.nmb_mode02_scale_step.MinValue = 0.01R
+        Me.nmb_mode02_scale_step.Name = "nmb_mode02_scale_step"
+        Me.nmb_mode02_scale_step.RefreshWindow = Nothing
+        Me.nmb_mode02_scale_step.Size = New System.Drawing.Size(120, 20)
+        Me.nmb_mode02_scale_step.StopChangeEvent = True
+        Me.nmb_mode02_scale_step.TabIndex = 41
+        Me.nmb_mode02_scale_step.Text = "NumericBox1"
+        Me.nmb_mode02_scale_step.TextIdent = ""
+        Me.nmb_mode02_scale_step.TransparentBackground = False
+        Me.nmb_mode02_scale_step.UnitNo = -1
+        Me.nmb_mode02_scale_step.Value = 0.05R
+        '
+        'grp_mode01
+        '
+        Me.grp_mode01.Controls.Add(Me.Label11)
+        Me.grp_mode01.Controls.Add(Me.nmb_mode01_angle_skip)
+        Me.grp_mode01.FrameColor = System.Drawing.Color.RoyalBlue
+        Me.grp_mode01.FrameWidth = 2
+        Me.grp_mode01.Location = New System.Drawing.Point(22, 190)
+        Me.grp_mode01.Name = "grp_mode01"
+        Me.grp_mode01.Size = New System.Drawing.Size(323, 65)
+        Me.grp_mode01.TabIndex = 42
+        Me.grp_mode01.TextIdent = ""
+        Me.grp_mode01.TitleColor = System.Drawing.Color.Black
+        Me.grp_mode01.TitleFont = New System.Drawing.Font("MS Gothic", 10.0!)
+        Me.grp_mode01.TitleText = "Mode01"
+        Me.grp_mode01.TransparentBackground = False
+        Me.grp_mode01.Visible = False
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(19, 32)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(84, 14)
+        Me.Label11.TabIndex = 39
+        Me.Label11.Text = "Angle skip:"
+        '
+        'nmb_mode01_angle_skip
+        '
+        Me.nmb_mode01_angle_skip.BackColor = System.Drawing.Color.White
+        Me.nmb_mode01_angle_skip.DataIdent = ""
+        Me.nmb_mode01_angle_skip.DataType = FZ_CustomControl.DATATYPE.None
+        Me.nmb_mode01_angle_skip.DecimalDigits = 0
+        Me.nmb_mode01_angle_skip.Font = New System.Drawing.Font("MS Gothic", 10.0!)
+        Me.nmb_mode01_angle_skip.ForeColor = System.Drawing.Color.Black
+        Me.nmb_mode01_angle_skip.Location = New System.Drawing.Point(183, 26)
+        Me.nmb_mode01_angle_skip.MaxValue = 90.0R
+        Me.nmb_mode01_angle_skip.Measurement = 0R
+        Me.nmb_mode01_angle_skip.MinValue = 0R
+        Me.nmb_mode01_angle_skip.Name = "nmb_mode01_angle_skip"
+        Me.nmb_mode01_angle_skip.RefreshWindow = Nothing
+        Me.nmb_mode01_angle_skip.Size = New System.Drawing.Size(120, 20)
+        Me.nmb_mode01_angle_skip.StopChangeEvent = True
+        Me.nmb_mode01_angle_skip.TabIndex = 38
+        Me.nmb_mode01_angle_skip.Text = "NumericBox1"
+        Me.nmb_mode01_angle_skip.TextIdent = ""
+        Me.nmb_mode01_angle_skip.TransparentBackground = False
+        Me.nmb_mode01_angle_skip.UnitNo = -1
+        Me.nmb_mode01_angle_skip.Value = 0R
+        '
         'NormalForm
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -629,6 +774,10 @@ Partial Class NormalForm
         Me.tabFigureSet.PerformLayout()
         Me.GroupPanel1.ResumeLayout(False)
         Me.GroupPanel1.PerformLayout()
+        Me.grp_mode02.ResumeLayout(False)
+        Me.grp_mode02.PerformLayout()
+        Me.grp_mode01.ResumeLayout(False)
+        Me.grp_mode01.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -667,5 +816,13 @@ Partial Class NormalForm
     Friend WithEvents GroupPanel1 As FZ_CustomControl.GroupPanel
     Friend WithEvents Label6 As Label
     Friend WithEvents cmb_mode As FZ_CustomControl.ComboBoxEx
+    Friend WithEvents grp_mode02 As FZ_CustomControl.GroupPanel
+    Friend WithEvents Label8 As Label
+    Friend WithEvents nmb_mode02_angle_skip As FZ_CustomControl.NumericBox
+    Friend WithEvents nmb_mode02_scale_step As FZ_CustomControl.NumericBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents grp_mode01 As FZ_CustomControl.GroupPanel
+    Friend WithEvents Label11 As Label
+    Friend WithEvents nmb_mode01_angle_skip As FZ_CustomControl.NumericBox
 End Class
 

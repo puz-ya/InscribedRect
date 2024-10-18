@@ -1,4 +1,4 @@
-// ***************************************************************************
+﻿// ***************************************************************************
 //					(C) Copyright OMRON CORPORATION 2005-2011
 //							All Rights Reserved
 // ---------------------------------------------------------------------------
@@ -127,12 +127,12 @@ int CLASSNAME::MeasureProcSub(ProcUnit *ptrProcUnit)
 	int sizeY = ptrInImage->sizeY;
 	
 	//TODO: only Mode01 works fast enough to consider using
-	ptrSetupData->mode = 1;
+	//ptrSetupData->mode = 2;
 
 	RotatedRect best;
 
-	switch(ptrSetupData->mode) {
-		case 0:
+	switch(ptrSetupData->mode + 1) {
+		case -1000:
 			//Very long Point-basde method, 20 sec (!) on 640x480, just to tests
 			MeasureMode00(ptrProcUnit, ptrInImage);
 		break;
@@ -141,6 +141,10 @@ int CLASSNAME::MeasureProcSub(ProcUnit *ptrProcUnit)
 			//Non Convex Poly method
 			MeasureMode01(ptrProcUnit, ptrInImage);
 		break;
+
+		case 2:
+			//Convex Pavel-GPT method
+			MeasureMode02(ptrProcUnit, ptrInImage);
 
 		default:
 			MeasureMode01(ptrProcUnit, ptrInImage);
@@ -380,7 +384,8 @@ void CLASSNAME::MeasureMode01(ProcUnit* ptrProcUnit, IMAGE* ptrInImage) {
 	begin = steady_clock::now();
 
 	// Compute largest rect inside polygon
-	RotatedRect r = largestRectInNonConvexPoly(img, ptrSetupData->angle);
+	//RotatedRect retRect = largestRectInNonConvexPoly(img, ptrSetupData->angle, ptrSetupData->skip_x, ptrSetupData->skip_y);
+	RotatedRect retRect = largestRectInNonConvexPoly(img, ptrSetupData);
 
 	end = steady_clock::now();
 	cout << "largestRectInNonConvexPoly(img)" << (double)duration_cast<milliseconds>(end - begin).count() << endl;
@@ -392,14 +397,14 @@ void CLASSNAME::MeasureMode01(ProcUnit* ptrProcUnit, IMAGE* ptrInImage) {
 	for (int i = 0; i < 4; i++) {
 		ptrMeasureData->vert[i] = Point2f(0.f, 0.f);
 	}
-	//r.points(pts);
-	r.points(ptrMeasureData->vert);
 
-	ptrMeasureData->width = r.size.width;
-	ptrMeasureData->height = r.size.height;
-	ptrMeasureData->area = r.size.area();
-	ptrMeasureData->center_x = r.center.x;
-	ptrMeasureData->center_y = r.center.y;
+	retRect.points(ptrMeasureData->vert);
+
+	ptrMeasureData->width = retRect.size.width;
+	ptrMeasureData->height = retRect.size.height;
+	ptrMeasureData->area = retRect.size.area();
+	ptrMeasureData->center_x = retRect.center.x;
+	ptrMeasureData->center_y = retRect.center.y;
 
 }
 
@@ -442,7 +447,7 @@ Rect findMinRect(const Mat1b& src)
 
 // Finding all "255", not zeros as in findMinRect
 // Based on: https://stackoverflow.com/a/30418912/5008845
-Rect findMinRectUnoBased(const Mat1b& src)
+Rect findMinRectUnoBased(const Mat1b& src, SETUPDATA* ptrSetupData)
 {
 	//start measuring unit working time
 	steady_clock::time_point begin, end;
@@ -455,9 +460,9 @@ Rect findMinRectUnoBased(const Mat1b& src)
 	Rect maxRect(0, 0, 0, 0);
 	float maxArea = 0.f;
 
-	for (int r = 0; r < src.rows; ++r)
+	for (int r = 0; r < src.rows; r += 1)
 	{
-		for (int c = 0; c < src.cols; ++c)
+		for (int c = 0; c < src.cols; c += 1)
 		{
 			if (src(r, c) == 255)
 			{
@@ -466,7 +471,9 @@ Rect findMinRectUnoBased(const Mat1b& src)
 			}
 
 			float minw = W(r, c);
-			for (int h = 0; h < H(r, c); ++h)
+			int maxH = H(r, c);
+
+			for (int h = 0; h < maxH; h += 1)
 			{
 				minw = min(minw, W(r - h, c));
 				float area = (h + 1) * minw;
@@ -486,7 +493,7 @@ Rect findMinRectUnoBased(const Mat1b& src)
 }
 
 
-RotatedRect largestRectInNonConvexPoly(const Mat1b& src, int max_angle)
+RotatedRect largestRectInNonConvexPoly(const Mat1b& src, SETUPDATA* ptrSetupData)
 {
 
 	//start measuring unit working time
@@ -495,7 +502,7 @@ RotatedRect largestRectInNonConvexPoly(const Mat1b& src, int max_angle)
 	steady_clock::time_point begin_p1, end_p1;
 	begin_p1 = steady_clock::now();
 
-	if (max_angle < 0 || max_angle > 90) {
+	if (ptrSetupData->max_angle < 0 || ptrSetupData->max_angle > 90) {
 		Point2f emptyP1 = Point2f(0, 0);
 		Point2f emptyP2 = Point2f(0, 1);
 		Point2f emptyP3 = Point2f(1, 1);
@@ -524,7 +531,7 @@ RotatedRect largestRectInNonConvexPoly(const Mat1b& src, int max_angle)
 	steady_clock::time_point begin_p2, end_p2;
 
 	// For each angle
-	for (int angle = 0; angle <= max_angle; angle += 1)
+	for (int angle = -ptrSetupData->max_angle; angle <= ptrSetupData->max_angle; angle += 1 + ptrSetupData->mode01_skip_angle)
 	{
 		cout << angle << endl;
 		begin_p2 = steady_clock::now();
@@ -546,7 +553,7 @@ RotatedRect largestRectInNonConvexPoly(const Mat1b& src, int max_angle)
 
 		//try this, no invert.
 		// https://stackoverflow.com/questions/2478447/find-largest-rectangle-containing-only-zeros-in-an-n%C3%97n-binary-matrix
-		Rect r = findMinRectUnoBased(crop);
+		Rect r = findMinRectUnoBased(crop, ptrSetupData);
 
 		//// Invert colors
 		//crop = ~crop;
@@ -589,4 +596,113 @@ RotatedRect largestRectInNonConvexPoly(const Mat1b& src, int max_angle)
 	cout << "largestRectInNonConvexPoly() Part3 End: " << (double)duration_cast<milliseconds>(end_p3 - begin_p3).count() << endl;
 
 	return rrect;
+}
+
+
+// Check if Rect in Mask 
+bool isRectangleInsideMask(const Mat& mask, const RotatedRect& rect) {
+	
+	Point2f rectPoints[4];
+	rect.points(rectPoints);
+	uchar mask_val;
+
+	for (int i = 0; i < 4; i++) {
+		
+		//first check boundaries, because of rect rotation -> out of MASK borders!
+		if (rectPoints[i].x < 0 || rectPoints[i].x >= mask.cols ||
+			rectPoints[i].y < 0 || rectPoints[i].y >= mask.rows) {
+			
+			return false;
+		}
+		else {
+			//if we're inside the MASK borders, check MASK pixels
+			mask_val = mask.at<uchar>(rectPoints[i].y, rectPoints[i].x);
+			
+			if (mask_val == 0) {
+				return false;
+			}
+		}
+
+	}
+	return true;
+}
+
+//Pavel-GPT Method with scaling and rotating the rectangle
+void CLASSNAME::MeasureMode02(ProcUnit* ptrProcUnit, IMAGE* ptrInImage) {
+
+	//start measuring unit working time
+	steady_clock::time_point begin, end;
+	begin = steady_clock::now();
+
+	SETUPDATA* ptrSetupData = ptrProcUnit->GetSetupData();
+	MEASUREDATA* ptrMeasureData = ptrProcUnit->GetMeasureData();
+
+	Mat binary = Mat(ptrInImage->sizeY, ptrInImage->sizeX, CV_8U, ptrInImage->imageData);
+	
+	//replace all "1" black values with OpenCV "0"
+	//https://stackoverflow.com/a/32348783
+	int newValue = 0;
+	int oldValue = 1;
+	binary.setTo(newValue, binary == oldValue);
+
+	// Find contours
+	vector<vector<Point>> contours;
+	findContours(binary, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
+	
+	// Find biggest contour
+	int largestContourIdx = -1;
+	double maxArea = 0;
+	for (size_t i = 0; i < contours.size(); i++) {
+		double area = contourArea(contours[i]);
+		if (area > maxArea) {
+			maxArea = area;
+			largestContourIdx = i;
+		}
+	}
+
+	if (largestContourIdx == -1) {
+		cout << "NO contours" << endl;
+		return;
+	}
+
+	// Create object mask
+	Mat mask = Mat::zeros(binary.size(), CV_8UC1);
+	drawContours(mask, contours, largestContourIdx, Scalar(255), FILLED);
+
+	// Search for max inscribbed rectangle
+	RotatedRect bestRect;
+	double bestArea = 0;
+
+	// Iterations per all possible rotation angles and sizes of rectangle
+	for (int angle = -ptrSetupData->max_angle; angle <= ptrSetupData->max_angle; angle += 1 + ptrSetupData->mode02_skip_angle) {  // Rotations -180;180
+		for (float scale = 1.0; scale > 0.1; scale -= ptrSetupData->mode02_step_scale) {  // Changing scale
+			RotatedRect rect = RotatedRect(Point2f(mask.cols / 2, mask.rows / 2), Size2f(mask.cols * scale, mask.rows * scale), angle);
+			
+			if (isRectangleInsideMask(mask, rect)) {
+				double area = rect.size.width * rect.size.height;
+				if (area > bestArea) {
+					bestArea = area;
+					bestRect = rect;
+				}
+
+				break;	//if we've found an OK area for this iteration, no point in make it LESS by next scale.
+			}
+		}
+	}
+
+	//Point2f pts[4];
+	for (int i = 0; i < 4; i++) {
+		ptrMeasureData->vert[i] = Point2f(0.f, 0.f);
+	}
+	//r.points(pts);
+	bestRect.points(ptrMeasureData->vert);
+
+	ptrMeasureData->width = bestRect.size.width;
+	ptrMeasureData->height = bestRect.size.height;
+	ptrMeasureData->area = bestRect.size.area();
+	ptrMeasureData->center_x = bestRect.center.x;
+	ptrMeasureData->center_y = bestRect.center.y;
+
+	end = steady_clock::now();
+
 }

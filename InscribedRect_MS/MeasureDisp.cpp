@@ -117,9 +117,9 @@ int CLASSNAME::MeasureDispT(ProcUnit *ptrProcUnit, int subNo, TextWindow *ptrTex
 	//%.2f - float
 	//%s - string
 
-	ptrTextWindow->DrawTextW(judge, TRUE, _T("Mode: %d"), ptrSetupData->mode);
+	ptrTextWindow->DrawTextW(judge, TRUE, _T("Mode: %d"), ptrSetupData->mode + 1);
 
-	ptrTextWindow->DrawTextW(judge, TRUE, _T("Max angle: %d"), ptrSetupData->angle);
+	ptrTextWindow->DrawTextW(judge, TRUE, _T("Max angle: %d"), ptrSetupData->max_angle);
 	
 	ptrTextWindow->DrawTextW(judge, TRUE, _T("--- --- --- --- ---"));
 

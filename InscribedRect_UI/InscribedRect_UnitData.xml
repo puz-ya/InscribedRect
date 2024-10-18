@@ -9,8 +9,13 @@
     </overallJudge>
     <overallJudge no="103" ident="overallJudge" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
 
-    <mode no="200" ident="mode" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
-    <angle no="201" ident="angle" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    <mode no="200" ident="mode" setEnable="1" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    <max_angle no="201" ident="max_angle" setEnable="1" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+
+    <m01angleSkip no="300" ident="m01angleSkip" setEnable="1" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+
+    <m02angleSkip no="400" ident="m02angleSkip" setEnable="1" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    <m02scaleStep no="401" ident="m02scaleStep" setEnable="1" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
 
     <x1 no="1000" ident="x1" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
     <y1 no="1001" ident="y1" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />

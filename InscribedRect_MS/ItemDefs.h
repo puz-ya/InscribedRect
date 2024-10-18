@@ -71,13 +71,21 @@ public:
 	int MeasureProcSub(ProcUnit *ptrProcUnit);
 
 	//User defined methods
-	void MeasureMode00(ProcUnit* ptrProcUnit, IMAGE* ptrInImage);
-	void MeasureMode01(ProcUnit* ptrProcUnit, IMAGE* ptrInImage);
+	void MeasureMode00(ProcUnit* ptrProcUnit, IMAGE* ptrInImage);	//verticles + mask, very long
+	void MeasureMode01(ProcUnit* ptrProcUnit, IMAGE* ptrInImage);	//nonconvex poly
+	void MeasureMode02(ProcUnit* ptrProcUnit, IMAGE* ptrInImage);	//pavel-gpt with rotation rect & scale
 };
 
 cv::RotatedRect largestRectInNonConvexPoly(const cv::Mat1b& src, int max_angle);
+cv::RotatedRect largestRectInNonConvexPoly(const cv::Mat1b& src, int max_angle, int skip_x, int skip_y);
+cv::RotatedRect largestRectInNonConvexPoly(const cv::Mat1b& src, SETUPDATA* ptrSetupData);
+
 cv::Rect findMinRect(const cv::Mat1b& src);
 cv::Rect findMinRectUnoBased(const cv::Mat1b& src);
+cv::Rect findMinRectUnoBased(const cv::Mat1b& src, int skip_x, int skip_y);
+cv::Rect findMinRectUnoBased(const cv::Mat1b& src, SETUPDATA* ptrSetupData);
+
+bool isRectangleInsideMask(const cv::Mat& mask, const cv::RotatedRect& rect);
 
 // definitaion of setting data
 struct SETUPDATA {
@@ -90,7 +98,16 @@ struct SETUPDATA {
 	int unitPos4;
 
 	int mode;	//number of algo we're using
-	int angle;	//max rotation angle to check all rect (0 to angle)
+	int max_angle;	//max rotation angle to check all rect (0 to angle)
+
+	int mode01_skip_x;	//step to skip pixels by OX when checking rectangles, did not work
+	int mode01_skip_y;	//step to skip pixels by OY when checking rectangles, did not work
+	int mode01_skip_h;	//step to skip calculation of H area values...mmm meh
+	int mode01_skip_angle;	//step to skip angles
+
+	int mode02_skip_angle;	//step to skip angles
+	double mode02_step_scale;	//[0.01; 0.99] range
+
 };
 
 // definition of mesaure data

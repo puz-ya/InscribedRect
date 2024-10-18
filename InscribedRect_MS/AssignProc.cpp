@@ -84,8 +84,14 @@ int CLASSNAME::AssignProc2(ProcUnit* ptrProcUnit) {
 		return JUDGE_MEMORYERROR;
 	}
 
-	if (ptrSetupData->angle < 0 || ptrSetupData->angle > 90) {
-		ptrSetupData->angle = 0;
+	//default value for init max_angle (0 - no rotations)
+	if (ptrSetupData->max_angle < 0 || ptrSetupData->max_angle > 90) {
+		ptrSetupData->max_angle = 0;
+	}
+
+	//default value for step_scale in Mode02
+	if (ptrSetupData->mode02_step_scale < 0.01 || ptrSetupData->mode02_step_scale > 0.99) {
+		ptrSetupData->mode02_step_scale = 0.05;
 	}
 	
 

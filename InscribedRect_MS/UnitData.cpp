@@ -49,7 +49,12 @@ static const UDATA unitParam[] = {
 	{103, _T("OJ")},
 
 	{200, _T("mode")},	//number of algo we're using
-	{201, _T("angle")},	//max rotation angle to check all rect (0 to angle)
+	{201, _T("max_angle")},	//max rotation angle to check all rect (0 to angle)
+
+	{300, _T("m01angleSkip")},	//number angles to skip while rotating in Mode01
+
+	{400, _T("m02angleSkip")},	//number angles to skip while rotating in Mode02
+	{401, _T("m02scaleStep")},	//number angles to skip while rotating in Mode02
 
 	//Output values
 	{1000, _T("x1")},
@@ -134,7 +139,22 @@ int CLASSNAME::SetUnitData(ProcUnit *ptrProcUnit, int dataNo, ANYTYPE *data)
 
 		//{ 201, _T("angle") },	//max rotation angle to check all rect (0 to angle)
 	case 201:
-		ptrSetupData->angle = data->GetIVal();
+		ptrSetupData->max_angle = data->GetIVal();
+		break;
+
+		//{ 300, _T("m01angleSkip") },	//number angles to skip while rotating in Mode01
+	case 300:
+		ptrSetupData->mode01_skip_angle = data->GetIVal();
+		break;
+
+		//{ 400, _T("m02angleSkip") },	//number angles to skip while rotating in Mode02
+	case 400:
+		ptrSetupData->mode02_skip_angle = data->GetIVal();
+		break;
+
+		//{ 401, _T("m02scaleStep") },	//number angles to skip while rotating in Mode02
+	case 401:
+		ptrSetupData->mode02_step_scale = data->GetDoubleValue();
 		break;
 
 	default:
@@ -159,10 +179,10 @@ int CLASSNAME::SetUnitData(ProcUnit *ptrProcUnit, TCHAR *dataIdent, ANYTYPE *dat
 {
 	int ret = -1;
 
-	//some internal FH-AP system param slowing us down on SetupWindow open ffs
-	if (_tcsicmp(dataIdent, _T("uiIdent")) == 0) {
-		return ret;
-	}
+	////some internal FH-AP system param slowing us down on SetupWindow open ffs
+	//if (_tcsicmp(dataIdent, _T("uiIdent")) == 0) {
+	//	return ret;
+	//}
 
 	for (int i = 0; unitParam[i].no != -1; ++i) {
 		if (_tcsicmp(dataIdent, unitParam[i].name) == 0) {
@@ -212,7 +232,22 @@ int CLASSNAME::GetUnitData(ProcUnit *ptrProcUnit, int dataNo, ANYTYPE *data)
 
 		//{ 201, _T("angle") },	//max rotation angle to check all rect (0 to angle)
 	case 201:
-		data->SetData(ptrSetupData->angle);
+		data->SetData(ptrSetupData->max_angle);
+		break;
+
+		//{ 300, _T("m01angleSkip") },	//number angles to skip while rotating in Mode01
+	case 300:
+		data->SetData(ptrSetupData->mode01_skip_angle);
+		break;
+
+		//{ 400, _T("m02angleSkip") },	//number angles to skip while rotating in Mode02
+	case 400:
+		data->SetData(ptrSetupData->mode02_skip_angle);
+		break;
+
+		//{ 401, _T("m02scaleStep") },	//number angles to skip while rotating in Mode02
+	case 401:
+		data->SetData(ptrSetupData->mode02_step_scale);
 		break;
 
 		//--- --- --- Output measurement values
@@ -298,10 +333,10 @@ int CLASSNAME::GetUnitData(ProcUnit *ptrProcUnit, TCHAR *dataIdent, ANYTYPE *dat
 {
 	int ret = -1;
 
-	//some internal FH-AP system param slowing us down on SetupWindow open ffs
-	if (_tcsicmp(dataIdent, _T("uiIdent")) == 0) {
-		return ret;
-	}
+	////some internal FH-AP system param slowing us down on SetupWindow open ffs
+	//if (_tcsicmp(dataIdent, _T("uiIdent")) == 0) {
+	//	return ret;
+	//}
 
 	for (int i = 0; unitParam[i].no != -1; ++i) {
 		if (_tcsicmp(dataIdent, unitParam[i].name) == 0) {
