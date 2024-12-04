@@ -111,15 +111,15 @@ int CLASSNAME::MeasureProcSub(ProcUnit *ptrProcUnit)
 	if (ptrInImage == NULL) {
 		return(-2);
 	}
+	if (ptrInImage->sizeX == 0 || ptrInImage->sizeY == 0) {
+		return -2;
+	}
+
 	ptrProcUnit->ImageDataAlloc(0, sizeof(IMAGE) + ptrInImage->size);
 	IMAGE *ptrOutImage = ptrProcUnit->GetImageData(0);
 	if (NULL == ptrOutImage) {
 		return(-2);
 	}
-
-	//copy only Image Data headers
-	//memcpy(ptrOutImage, ptrInImage, sizeof(IMAGE));
-
 
 	int	judge = JUDGE_OK;
 
@@ -133,7 +133,7 @@ int CLASSNAME::MeasureProcSub(ProcUnit *ptrProcUnit)
 
 	switch(ptrSetupData->mode + 1) {
 		case -1000:
-			//Very long Point-basde method, 20 sec (!) on 640x480, just to tests
+			//Very long Point-based method, 20 sec (!) on 640x480, just to tests
 			MeasureMode00(ptrProcUnit, ptrInImage);
 		break;
 
@@ -155,6 +155,12 @@ int CLASSNAME::MeasureProcSub(ProcUnit *ptrProcUnit)
 	return NORMAL;
 }
 
+/// <summary>
+/// Mode00 just for the tests. It's too slow for any production line.
+/// Playground.
+/// </summary>
+/// <param name="ptrProcUnit"></param>
+/// <param name="ptrInImage"></param>
 void CLASSNAME::MeasureMode00(ProcUnit* ptrProcUnit, IMAGE* ptrInImage) {
 
 	//start measuring unit working time
@@ -162,105 +168,6 @@ void CLASSNAME::MeasureMode00(ProcUnit* ptrProcUnit, IMAGE* ptrInImage) {
 
 	SETUPDATA* ptrSetupData = ptrProcUnit->GetSetupData();
 	MEASUREDATA* ptrMeasureData = ptrProcUnit->GetMeasureData();
-
-	//if (ptrSetupData->unitPos1 == 0 && ptrSetupData->unitPos2 == 0 && ptrSetupData->unitPos3 == 0 && ptrSetupData->unitPos4 == 0) {
-	//	return -2;
-	//}
-
-	//ANYTYPE* data1 = new ANYTYPE();
-	//ANYTYPE* data2 = new ANYTYPE();
-	//ANYTYPE* data3 = new ANYTYPE();
-	//ANYTYPE* data4 = new ANYTYPE();
-
-	//ProcUnit* pUnit1 = ptrProcUnit->GetProcUnit(ptrSetupData->unitPos1);
-	//ProcUnit* pUnit2 = ptrProcUnit->GetProcUnit(ptrSetupData->unitPos2);
-	//ProcUnit* pUnit3 = ptrProcUnit->GetProcUnit(ptrSetupData->unitPos3);
-	//ProcUnit* pUnit4 = ptrProcUnit->GetProcUnit(ptrSetupData->unitPos4);
-
-	////std::vector<int> anypos = { ptrSetupData->unitPos1, ptrSetupData->unitPos2, ptrSetupData->unitPos3, ptrSetupData->unitPos4 };
-	//std::vector<ProcUnit*> anyProc;
-	//std::vector<ANYTYPE*> anyTypes;
-
-	////162 for Scan edge pos == scanLines (number of scan regions)
-	//if (pUnit1 != nullptr) {
-	//	//GetUnitData(pUnit1, 162, data1);
-	//	pUnit1->GetUnitData(162, data1);
-
-	//	anyProc.push_back(pUnit1);
-	//	anyTypes.push_back(data1);
-	//}
-	//else {
-	//	return -2;
-	//}
-
-	//if (pUnit2 != nullptr) {
-	//	//GetUnitData(pUnit2, 162, data2);
-	//	pUnit2->GetUnitData(162, data2);
-
-	//	anyProc.push_back(pUnit2);
-	//	anyTypes.push_back(data2);
-	//}
-	//else {
-	//	return -2;
-	//}
-
-	//if (pUnit3 != nullptr) {
-	//	pUnit3->GetUnitData(162, data3);
-
-	//	anyProc.push_back(pUnit3);
-	//	anyTypes.push_back(data3);
-	//}
-	//else {
-	//	return -2;
-	//}
-
-	//if (pUnit4 != nullptr) {
-	//	pUnit4->GetUnitData(162, data4);
-
-	//	anyProc.push_back(pUnit4);
-	//	anyTypes.push_back(data4);
-	//}
-	//else {
-	//	return -2;
-	//}
-
-
-
-	//int k = 0;
-	////Initialize std::vector from MeasureData struct.
-	//ptrMeasureData->contour = std::vector<cv::Point>();
-	//ptrMeasureData->contour.clear();
-
-	////Collecting all points from all 4 possible scan edge pos units
-	//for (ANYTYPE* type : anyTypes) {
-	//	int lineLimit = type->GetIntValue();
-
-	//	lineLimit = 10;
-
-	//	int x, y;
-	//	ANYTYPE* data = new ANYTYPE();
-
-	//	//cv::Point cvp(0, 0);
-
-	//	for (int i = 0; i < lineLimit; i++) {
-
-	//		anyProc[k]->GetUnitData(30000 + i, data);
-	//		x = data->GetIntValue();
-	//		anyProc[k]->GetUnitData(40000 + i, data);
-	//		y = data->GetIntValue();
-
-	//		//if (cvp.x != 0 && cvp.y != 0) {
-	//		if (x != 0 && y != 0) {
-	//			//ptrMeasureData->contour.push_back(cv::Point(x,y));
-	//			ptrMeasureData->contour.push_back(cv::Point(x, y));
-	//		}
-
-	//	}
-
-	//	k++;
-	//	delete data;
-	//}
-
 
 //https://stackoverflow.com/a/70365569
 //NOT F WORKING
@@ -272,7 +179,7 @@ void CLASSNAME::MeasureMode00(ProcUnit* ptrProcUnit, IMAGE* ptrInImage) {
 //Masks & Rectangle
 //cv::Mat img = cv::Mat::zeros(sizeX, sizeY, CV_8UC3);
 
-	cv::Mat img = cv::Mat::zeros(512, 512, CV_8UC3);
+	cv::Mat img = cv::Mat::zeros(SIZE512, SIZE512, CV_8UC3);
 	cv::Mat mask = cv::Mat::zeros(img.size(), CV_8UC1);
 
 	ptrMeasureData->contour.clear();
@@ -296,7 +203,6 @@ void CLASSNAME::MeasureMode00(ProcUnit* ptrProcUnit, IMAGE* ptrInImage) {
 		for (int x = 0; x < mask.cols; ++x)
 		{
 			if (mask.at<uchar>(y, x) == 0) continue; //original
-			//if (mask.at<uchar>(x, y) == 0) continue;
 
 			cv::Point i1 = cv::Point(x, y);
 			int val1 = integral.at<int>(i1);
@@ -353,13 +259,6 @@ void CLASSNAME::MeasureMode00(ProcUnit* ptrProcUnit, IMAGE* ptrInImage) {
 	ptrMeasureData->center_x = best_local.x + best_local.width / 2;
 	ptrMeasureData->center_y = best_local.y + best_local.height / 2;
 
-
-	//delete data1;
-	//delete data2;
-	//delete data3;
-	//delete data4;
-
-
 }
 
 void CLASSNAME::MeasureMode01(ProcUnit* ptrProcUnit, IMAGE* ptrInImage) {
@@ -384,7 +283,6 @@ void CLASSNAME::MeasureMode01(ProcUnit* ptrProcUnit, IMAGE* ptrInImage) {
 	begin = steady_clock::now();
 
 	// Compute largest rect inside polygon
-	//RotatedRect retRect = largestRectInNonConvexPoly(img, ptrSetupData->angle, ptrSetupData->skip_x, ptrSetupData->skip_y);
 	RotatedRect retRect = largestRectInNonConvexPoly(img, ptrSetupData);
 
 	end = steady_clock::now();
@@ -492,7 +390,6 @@ Rect findMinRectUnoBased(const Mat1b& src, SETUPDATA* ptrSetupData)
 	return maxRect;
 }
 
-
 RotatedRect largestRectInNonConvexPoly(const Mat1b& src, SETUPDATA* ptrSetupData)
 {
 
@@ -598,7 +495,6 @@ RotatedRect largestRectInNonConvexPoly(const Mat1b& src, SETUPDATA* ptrSetupData
 	return rrect;
 }
 
-
 // Check if Rect in Mask 
 bool isRectangleInsideMask(const Mat& mask, const RotatedRect& rect) {
 	
@@ -676,7 +572,11 @@ void CLASSNAME::MeasureMode02(ProcUnit* ptrProcUnit, IMAGE* ptrInImage) {
 	// Iterations per all possible rotation angles and sizes of rectangle
 	for (int angle = -ptrSetupData->max_angle; angle <= ptrSetupData->max_angle; angle += 1 + ptrSetupData->mode02_skip_angle) {  // Rotations -180;180
 		for (float scale = 1.0; scale > 0.1; scale -= ptrSetupData->mode02_step_scale) {  // Changing scale
-			RotatedRect rect = RotatedRect(Point2f(mask.cols / 2, mask.rows / 2), Size2f(mask.cols * scale, mask.rows * scale), angle);
+			RotatedRect rect = RotatedRect(
+				Point2f(mask.cols / 2.0f, mask.rows / 2.0f), 
+				Size2f(mask.cols * scale, mask.rows * scale), 
+				angle
+			);
 			
 			if (isRectangleInsideMask(mask, rect)) {
 				double area = rect.size.width * rect.size.height;
@@ -685,7 +585,7 @@ void CLASSNAME::MeasureMode02(ProcUnit* ptrProcUnit, IMAGE* ptrInImage) {
 					bestRect = rect;
 				}
 
-				break;	//if we've found an OK area for this iteration, no point in make it LESS by next scale.
+				break;	//if we've found an OK area for this iteration, no point in making it LESS by next scale.
 			}
 		}
 	}

@@ -188,6 +188,9 @@ Copy "$(ProjectDir)..\..\ICON\OK\*.png" "..\..\..\..\Release_x64\ICON\OK"
     <None Include="res\ProcItem_MS.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\AP1CommConst.h" />
+    <ClInclude Include="..\Common\AP1CommFunc.h" />
+    <ClInclude Include="..\Common\AP1CommStruct.h" />
     <ClInclude Include="..\ItemDefs.h" />
     <ClInclude Include="ProcItem_MS.h" />
     <ClInclude Include="Resource.h" />

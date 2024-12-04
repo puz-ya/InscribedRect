@@ -49,7 +49,9 @@ static const UDATA unitParam[] = {
 	{103, _T("OJ")},
 
 	{200, _T("mode")},	//number of algo we're using
+	{200, _T("MD")},	//number of algo we're using
 	{201, _T("max_angle")},	//max rotation angle to check all rect (0 to angle)
+	{201, _T("MAXANG")},	//max rotation angle to check all rect (0 to angle)
 
 	{300, _T("m01angleSkip")},	//number angles to skip while rotating in Mode01
 
@@ -67,10 +69,17 @@ static const UDATA unitParam[] = {
 	{1007, _T("y4")},
 	
 	{1010, _T("area")},		//area
+	{1010, _T("AR")},		//area
+
 	{1011, _T("width")},	//width
+	{1011, _T("WT")},	//width
 	{1012, _T("height")},	//height
+	{1012, _T("HT")},	//height
+
 	{1013, _T("center_x")},	//center_x
+	{1013, _T("CX")},	//center_x
 	{1014, _T("center_y")},	//center_y
+	{1014, _T("CY")},	//center_y
 
 	{-1, NULL}
 };

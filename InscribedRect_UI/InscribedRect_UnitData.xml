@@ -9,12 +9,28 @@
     </overallJudge>
     <overallJudge no="103" ident="overallJudge" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
 
-    <mode no="200" ident="mode" setEnable="1" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
-    <max_angle no="201" ident="max_angle" setEnable="1" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    <mode no="200" ident="mode" setEnable="1" getEnable="" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="1" outputParam="" isGroup="">
+      <setting Type="ProcItemDialog.ComboBoxDialog" MessageFileIdent="InscribedRect" TextIdentList="Flow_MODE01:Flow_MODE02" ValueList="0:1" />
+    </mode>
+    <mode no="200" ident="mode" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
 
-    <m01angleSkip no="300" ident="m01angleSkip" setEnable="1" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    <max_angle no="201" ident="max_angle" setEnable="1" getEnable="" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="1" outputParam="" isGroup="" >
+      <setting Type="ProcItemDialog.ValueSetDialog" DecimalPlaces="0" Max="90" Min="0" />
+    </max_angle>
+    <max_angle no="201" ident="max_angle" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
 
-    <m02angleSkip no="400" ident="m02angleSkip" setEnable="1" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    <m01angleSkip no="300" ident="m01angleSkip" setEnable="1" getEnable="" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="1" outputParam="" isGroup="" >
+      <setting Type="ProcItemDialog.ValueSetDialog" DecimalPlaces="0" Max="90" Min="0" />
+    </m01angleSkip>
+    <m01angleSkip no="300" ident="m01angleSkip" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+
+    <m02angleSkip no="300" ident="m02angleSkip" setEnable="1" getEnable="" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="1" outputParam="" isGroup="" >
+      <setting Type="ProcItemDialog.ValueSetDialog" DecimalPlaces="0" Max="90" Min="0" />
+    </m02angleSkip>
+    <m02angleSkip no="400" ident="m02angleSkip" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
+    <m02scaleStep no="401" ident="m02scaleStep" setEnable="1" getEnable="" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="1" outputParam="" isGroup="" >
+      <setting Type="ProcItemDialog.ValueSetDialog" DecimalPlaces="2" Max="0.99" Min="0.01" />
+    </m02scaleStep>
     <m02scaleStep no="401" ident="m02scaleStep" setEnable="1" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
 
     <x1 no="1000" ident="x1" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
@@ -35,5 +51,5 @@
     <center_x no="1013" ident="center_x" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
     <center_y no="1014" ident="center_y" setEnable="" getEnable="1" multiData="0" multiNum="" multiCalc="" analyzable="" LowerDataIdent="" UpperDataIdent="" inputParam="" outputParam="1" isGroup="" />
     
-  </UNITDATA>
+</UNITDATA>
 </Reference>

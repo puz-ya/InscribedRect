@@ -12,6 +12,8 @@
 //         include files
 // *************************************
 
+#pragma once
+
 //#include <opencv2/opencv.hpp>	//we don't need ALL modules
 #include "opencv2/core.hpp"
 #include "opencv2/imgproc.hpp"
@@ -19,7 +21,11 @@
 #include <vector>
 #include <tchar.h>
 
-//using namespace cv;
+#include "Common/AP1CommConst.h"
+#include "Common/AP1CommFunc.h"
+#include "Common/AP1CommStruct.h"
+
+//using namespace cv;	//not here
 
 // *************************************
 //         macro definition
