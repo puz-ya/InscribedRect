@@ -74,6 +74,8 @@ Public Class NormalForm
             Me.tcNormal.TabPages(index).Controls.Add(Me.btnHelp)
             Me.tcNormal.TabPages(index).Controls.Add(Me.imgMain)
             Me.tcNormal.TabPages(index).Controls.Add(Me.ZoomMain)
+
+            Me.tcNormal.TabPages(index).Controls.Add(Me.grpMouseCoordinates)
         End If
 
     End Sub

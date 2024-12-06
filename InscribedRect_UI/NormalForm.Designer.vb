@@ -80,6 +80,9 @@ Partial Class NormalForm
         Me.rdoColorOUT = New FZ_CustomControl.RadioButtonEx()
         Me.stdsetReference = New FZ_CustomControl.StandardSet()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.tabOutputParameter.SuspendLayout()
         Me.grpTotalJudge.SuspendLayout()
         Me.tcNormal.SuspendLayout()
@@ -202,6 +205,7 @@ Partial Class NormalForm
         'tabRegion
         '
         Me.tabRegion.BackColor = System.Drawing.SystemColors.Control
+        Me.tabRegion.Controls.Add(Me.Label13)
         Me.tabRegion.Controls.Add(Me.Label10)
         Me.tabRegion.Controls.Add(Me.grpMouseCoordinates)
         Me.tabRegion.Controls.Add(Me.btnHelp)
@@ -514,6 +518,8 @@ Partial Class NormalForm
         'tabMeasure
         '
         Me.tabMeasure.BackColor = System.Drawing.SystemColors.Control
+        Me.tabMeasure.Controls.Add(Me.Label14)
+        Me.tabMeasure.Controls.Add(Me.Label12)
         Me.tabMeasure.Controls.Add(Me.grpSlices)
         Me.tabMeasure.Controls.Add(Me.grp_mode01)
         Me.tabMeasure.Controls.Add(Me.grp_mode02)
@@ -544,7 +550,7 @@ Partial Class NormalForm
         Me.grpSlices.Controls.Add(Me.nmbSlicesRows)
         Me.grpSlices.FrameColor = System.Drawing.Color.RoyalBlue
         Me.grpSlices.FrameWidth = 2
-        Me.grpSlices.Location = New System.Drawing.Point(22, 367)
+        Me.grpSlices.Location = New System.Drawing.Point(22, 298)
         Me.grpSlices.Name = "grpSlices"
         Me.grpSlices.Size = New System.Drawing.Size(323, 194)
         Me.grpSlices.TabIndex = 43
@@ -786,7 +792,7 @@ Partial Class NormalForm
         Me.grp_mode02.Controls.Add(Me.nmb_mode02_angle_skip)
         Me.grp_mode02.FrameColor = System.Drawing.Color.RoyalBlue
         Me.grp_mode02.FrameWidth = 2
-        Me.grp_mode02.Location = New System.Drawing.Point(22, 261)
+        Me.grp_mode02.Location = New System.Drawing.Point(351, 190)
         Me.grp_mode02.Name = "grp_mode02"
         Me.grp_mode02.Size = New System.Drawing.Size(323, 100)
         Me.grp_mode02.TabIndex = 39
@@ -863,7 +869,8 @@ Partial Class NormalForm
         '
         'btnMeasure
         '
-        Me.btnMeasure.Location = New System.Drawing.Point(78, 575)
+        Me.btnMeasure.Enabled = False
+        Me.btnMeasure.Location = New System.Drawing.Point(77, 510)
         Me.btnMeasure.Name = "btnMeasure"
         Me.btnMeasure.Size = New System.Drawing.Size(203, 30)
         Me.btnMeasure.TabIndex = 31
@@ -1055,7 +1062,7 @@ Partial Class NormalForm
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(320, 30)
         Me.Label7.TabIndex = 34
-        Me.Label7.Text = "It takes ~3 sec (!) for 640x480 px image and 5 degree (no skip angles)!"
+        Me.Label7.Text = "It takes ~1 sec (!) for 640x480 px image and 5 degree (no skip angles)!"
         '
         'colorSet
         '
@@ -1184,11 +1191,38 @@ Partial Class NormalForm
         'Label10
         '
         Me.Label10.Font = New System.Drawing.Font("MS Gothic", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.Label10.Location = New System.Drawing.Point(8, 493)
+        Me.Label10.Location = New System.Drawing.Point(19, 623)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(320, 30)
         Me.Label10.TabIndex = 67
         Me.Label10.Text = "TODO: Region figure in process..."
+        '
+        'Label12
+        '
+        Me.Label12.Font = New System.Drawing.Font("MS Gothic", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.Label12.Location = New System.Drawing.Point(19, 623)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(320, 30)
+        Me.Label12.TabIndex = 68
+        Me.Label12.Text = "TODO: Remeasure and Display graphics"
+        '
+        'Label13
+        '
+        Me.Label13.Font = New System.Drawing.Font("MS Gothic", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.Label13.Location = New System.Drawing.Point(19, 588)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(320, 30)
+        Me.Label13.TabIndex = 68
+        Me.Label13.Text = "Unit SAMPLE"
+        '
+        'Label14
+        '
+        Me.Label14.Font = New System.Drawing.Font("MS Gothic", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.Label14.Location = New System.Drawing.Point(19, 588)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(320, 30)
+        Me.Label14.TabIndex = 69
+        Me.Label14.Text = "Unit SAMPLE"
         '
         'NormalForm
         '
@@ -1282,5 +1316,8 @@ Partial Class NormalForm
     Friend WithEvents lblSetupImageWindowXY As FZ_CustomControl.LabelEx
     Friend WithEvents lblSetupImageDescriptXY As FZ_CustomControl.LabelEx
     Friend WithEvents Label10 As Label
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Label14 As Label
 End Class
 
