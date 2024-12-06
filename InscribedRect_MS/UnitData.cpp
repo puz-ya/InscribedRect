@@ -44,19 +44,34 @@ static const UDATA unitParam[] = {
 	{22, _T("unit3")},	//3rd scan edge position
 	{23, _T("unit4")},	//4th scan edge position
 	
-	//Output tab DEFAULT value for all FH / FHV units for many units
+	//Output tab has DEFAULT idents [101-103] for all FH / FHV units
+	{101, _T("outputCoordinate")},	//0: after scroll, 1: before scroll
+	{102, _T("calibration")},		//0: OFF, 1: ON
 	{103, _T("overallJudge")},
 	{103, _T("OJ")},
+
+
 
 	{200, _T("mode")},	//number of algo we're using
 	{200, _T("MD")},	//number of algo we're using
 	{201, _T("max_angle")},	//max rotation angle to check all rect (0 to angle)
 	{201, _T("MAXANG")},	//max rotation angle to check all rect (0 to angle)
 
+	{210, _T("sliceEnabled")},	//flag for slicing, special points on the edges
+	{211, _T("sliceType")},		//flag what comes first: 1 [rows & cols] or 2 [height & width]
+	{212, _T("sliceRows")},		//number of desired rows
+	{213, _T("sliceCols")},		//number of desired cols
+	{214, _T("sliceHeight")},	//number of desired height
+	{215, _T("sliceWidth")},	//number of desired width
+
+
+
 	{300, _T("m01angleSkip")},	//number angles to skip while rotating in Mode01
 
 	{400, _T("m02angleSkip")},	//number angles to skip while rotating in Mode02
 	{401, _T("m02scaleStep")},	//number angles to skip while rotating in Mode02
+
+	{999, _T("remeasure")},
 
 	//Output values
 	{1000, _T("x1")},
@@ -151,6 +166,37 @@ int CLASSNAME::SetUnitData(ProcUnit *ptrProcUnit, int dataNo, ANYTYPE *data)
 		ptrSetupData->max_angle = data->GetIVal();
 		break;
 
+		//{ 210, _T("sliceEnabled") },	//flag for slicing, special points on the edges
+	case 210:
+		ptrSetupData->sliceEnabled = data->GetIVal();
+		break;
+
+		//{ 211, _T("sliceType") },		//flag what comes first: [rows & cols] or [height & width]
+	case 211:
+		ptrSetupData->sliceType = data->GetIVal();
+		break;
+
+		//{ 212, _T("sliceRows") },		//number of desired rows
+	case 212:
+		ptrSetupData->sliceRows = data->GetIVal();
+		break;
+
+		//{ 213, _T("sliceCols") },		//number of desired cols
+	case 213:
+		ptrSetupData->sliceCols = data->GetIVal();
+		break;
+
+		//{ 214, _T("sliceHeight") },	//number of desired height
+	case 214:
+		ptrSetupData->sliceHeight = data->GetIVal();
+		break;
+
+		//{ 215, _T("sliceWidth") },	//number of desired width
+	case 215:
+		ptrSetupData->sliceWidth = data->GetIVal();
+		break;
+
+
 		//{ 300, _T("m01angleSkip") },	//number angles to skip while rotating in Mode01
 	case 300:
 		ptrSetupData->mode01_skip_angle = data->GetIVal();
@@ -164,6 +210,15 @@ int CLASSNAME::SetUnitData(ProcUnit *ptrProcUnit, int dataNo, ANYTYPE *data)
 		//{ 401, _T("m02scaleStep") },	//number angles to skip while rotating in Mode02
 	case 401:
 		ptrSetupData->mode02_step_scale = data->GetDoubleValue();
+		break;
+
+		//{ 999, _T("remeasure")},
+	case 999:
+		if (data->GetIntValue() == 7) {
+		
+			MeasureProcSub(ptrProcUnit);
+
+		};
 		break;
 
 	default:
@@ -243,6 +298,40 @@ int CLASSNAME::GetUnitData(ProcUnit *ptrProcUnit, int dataNo, ANYTYPE *data)
 	case 201:
 		data->SetData(ptrSetupData->max_angle);
 		break;
+
+
+
+		//{ 210, _T("sliceEnabled") },	//flag for slicing, special points on the edges
+	case 210:
+		data->SetData(ptrSetupData->sliceEnabled);
+		break;
+
+		//{ 211, _T("sliceType") },		//flag what comes first: [rows & cols] or [height & width]
+	case 211:
+		data->SetData(ptrSetupData->sliceType);
+		break;
+
+		//{ 212, _T("sliceRows") },		//number of desired rows
+	case 212:
+		data->SetData(ptrSetupData->sliceRows);
+		break;
+
+		//{ 213, _T("sliceCols") },		//number of desired cols
+	case 213:
+		data->SetData(ptrSetupData->sliceCols);
+		break;
+
+		//{ 214, _T("sliceHeight") },	//number of desired height
+	case 214:
+		data->SetData(ptrSetupData->sliceHeight);
+		break;
+
+		//{ 215, _T("sliceWidth") },	//number of desired width
+	case 215:
+		data->SetData(ptrSetupData->sliceWidth);
+		break;
+
+
 
 		//{ 300, _T("m01angleSkip") },	//number angles to skip while rotating in Mode01
 	case 300:

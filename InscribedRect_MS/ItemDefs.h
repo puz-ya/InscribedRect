@@ -25,6 +25,8 @@
 #include "Common/AP1CommFunc.h"
 #include "Common/AP1CommStruct.h"
 
+#include "Common/UnitInscribedRectConst.h"
+
 //using namespace cv;	//not here
 
 // *************************************
@@ -80,6 +82,12 @@ public:
 	void MeasureMode00(ProcUnit* ptrProcUnit, IMAGE* ptrInImage);	//verticles + mask, very long
 	void MeasureMode01(ProcUnit* ptrProcUnit, IMAGE* ptrInImage);	//nonconvex poly
 	void MeasureMode02(ProcUnit* ptrProcUnit, IMAGE* ptrInImage);	//pavel-gpt with rotation rect & scale
+
+	//Slices
+	std::vector<cv::Point> linePoints(int x0, int y0, int x1, int y1);
+	std::vector<cv::Point> linePointsSlice(ProcUnit* ptrProcUnit, int x0, int y0, int x1, int y1);
+	std::vector<cv::Point> linePointsSlice(int x0, int y0, int x1, int y1, int sliceDist, int sliceType);
+
 };
 
 cv::RotatedRect largestRectInNonConvexPoly(const cv::Mat1b& src, int max_angle);
@@ -114,6 +122,14 @@ struct SETUPDATA {
 	int mode02_skip_angle;	//step to skip angles
 	double mode02_step_scale;	//[0.01; 0.99] range
 
+	//Slices
+	int sliceEnabled;
+	int sliceType;
+	int sliceRows;
+	int sliceCols;
+	int sliceHeight;
+	int sliceWidth;
+	
 };
 
 // definition of mesaure data
@@ -135,6 +151,12 @@ struct MEASUREDATA {
 	double elapsedTime;
 
 	std::vector<cv::Point> contour;
-	cv::Point2f vert[4];	//verticles
+	cv::Point2f vert[4];	//verticles of the Main Rectangle
+
+	//Slices
+	std::vector<cv::Point> pointsOfSliceLeft;	//only selected points
+	std::vector<cv::Point> pointsOfSliceTop;	//only selected points
+	std::vector<cv::Point> pointsOfSliceRight;	//only selected points
+	std::vector<cv::Point> pointsOfSliceBottom;	//only selected points
 };
 

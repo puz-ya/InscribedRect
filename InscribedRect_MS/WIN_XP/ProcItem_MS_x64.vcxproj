@@ -191,6 +191,7 @@ Copy "$(ProjectDir)..\..\ICON\OK\*.png" "..\..\..\..\Release_x64\ICON\OK"
     <ClInclude Include="..\Common\AP1CommConst.h" />
     <ClInclude Include="..\Common\AP1CommFunc.h" />
     <ClInclude Include="..\Common\AP1CommStruct.h" />
+    <ClInclude Include="..\Common\UnitInscribedRectConst.h" />
     <ClInclude Include="..\ItemDefs.h" />
     <ClInclude Include="ProcItem_MS.h" />
     <ClInclude Include="Resource.h" />

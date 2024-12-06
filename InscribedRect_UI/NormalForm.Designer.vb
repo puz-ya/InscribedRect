@@ -22,7 +22,7 @@ Partial Class NormalForm
         Me.rdoDo = New FZ_CustomControl.RadioButtonEx()
         Me.coordinateSet = New FZ_CustomControl.CoordinateSetControl()
         Me.tcNormal = New System.Windows.Forms.TabControl()
-        Me.tabFigureSet = New System.Windows.Forms.TabPage()
+        Me.tabMeasure = New System.Windows.Forms.TabPage()
         Me.grp_mode01 = New FZ_CustomControl.GroupPanel()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.nmb_mode01_angle_skip = New FZ_CustomControl.NumericBox()
@@ -37,7 +37,7 @@ Partial Class NormalForm
         Me.Label5 = New System.Windows.Forms.Label()
         Me.cmb_edge0 = New FZ_CustomControl.ComboBoxEx()
         Me.cmb_edge1 = New FZ_CustomControl.ComboBoxEx()
-        Me.btn_measure = New System.Windows.Forms.Button()
+        Me.btnMeasure = New System.Windows.Forms.Button()
         Me.cmb_edge2 = New FZ_CustomControl.ComboBoxEx()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -46,24 +46,40 @@ Partial Class NormalForm
         Me.cmb_edge3 = New FZ_CustomControl.ComboBoxEx()
         Me.sls_angle = New FZ_CustomControl.SliderSet()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.btnHelp = New FZ_CustomControl.ImageButton()
-        Me.btnCancel = New FZ_CustomControl.ImageButton()
-        Me.btnOK = New FZ_CustomControl.ImageButton()
-        Me.imgMain = New FZ_CustomControl.SetupImageWindow()
-        Me.ZoomMain = New FZ_CustomControl.ZoomBrowser()
         Me.colorSet = New FZ_CustomControl.ColorSetControl()
         Me.cbColorSpecification = New FZ_CustomControl.CheckBoxEx()
         Me.LabelEx3 = New FZ_CustomControl.LabelEx()
         Me.rdoColorIN = New FZ_CustomControl.RadioButtonEx()
         Me.rdoColorOUT = New FZ_CustomControl.RadioButtonEx()
         Me.stdsetReference = New FZ_CustomControl.StandardSet()
+        Me.grpSlices = New FZ_CustomControl.GroupPanel()
+        Me.lblSlicesRows = New System.Windows.Forms.Label()
+        Me.nmbSlicesRows = New FZ_CustomControl.NumericBox()
+        Me.lblSlicesType = New System.Windows.Forms.Label()
+        Me.cmbSlicesType = New FZ_CustomControl.ComboBoxEx()
+        Me.chbSlicesEnable = New FZ_CustomControl.CheckBoxEx()
+        Me.lblSlicesCols = New System.Windows.Forms.Label()
+        Me.nmbSlicesCols = New FZ_CustomControl.NumericBox()
+        Me.lblSlicesWidth = New System.Windows.Forms.Label()
+        Me.nmbSlicesWidth = New FZ_CustomControl.NumericBox()
+        Me.lblSlicesHeight = New System.Windows.Forms.Label()
+        Me.nmbSlicesHeight = New FZ_CustomControl.NumericBox()
+        Me.tabRegion = New System.Windows.Forms.TabPage()
+        Me.imgMain = New FZ_CustomControl.SetupImageWindow()
+        Me.ZoomMain = New FZ_CustomControl.ZoomBrowser()
+        Me.fscRegion = New FZ_CustomControl.FigureSetControl()
+        Me.btnHelp = New FZ_CustomControl.ImageButton()
+        Me.btnCancel = New FZ_CustomControl.ImageButton()
+        Me.btnOK = New FZ_CustomControl.ImageButton()
         Me.tabOutputParameter.SuspendLayout()
         Me.grpTotalJudge.SuspendLayout()
         Me.tcNormal.SuspendLayout()
-        Me.tabFigureSet.SuspendLayout()
+        Me.tabMeasure.SuspendLayout()
         Me.grp_mode01.SuspendLayout()
         Me.grp_mode02.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
+        Me.grpSlices.SuspendLayout()
+        Me.tabRegion.SuspendLayout()
         Me.SuspendLayout()
         '
         'tsbNormal
@@ -163,7 +179,8 @@ Partial Class NormalForm
         '
         'tcNormal
         '
-        Me.tcNormal.Controls.Add(Me.tabFigureSet)
+        Me.tcNormal.Controls.Add(Me.tabRegion)
+        Me.tcNormal.Controls.Add(Me.tabMeasure)
         Me.tcNormal.Controls.Add(Me.tabOutputParameter)
         Me.tcNormal.Font = New System.Drawing.Font("MS Gothic", 10.0!)
         Me.tcNormal.Location = New System.Drawing.Point(0, 16)
@@ -172,26 +189,23 @@ Partial Class NormalForm
         Me.tcNormal.Size = New System.Drawing.Size(1024, 728)
         Me.tcNormal.TabIndex = 1
         '
-        'tabFigureSet
+        'tabMeasure
         '
-        Me.tabFigureSet.BackColor = System.Drawing.SystemColors.Control
-        Me.tabFigureSet.Controls.Add(Me.grp_mode01)
-        Me.tabFigureSet.Controls.Add(Me.grp_mode02)
-        Me.tabFigureSet.Controls.Add(Me.Label6)
-        Me.tabFigureSet.Controls.Add(Me.cmb_mode)
-        Me.tabFigureSet.Controls.Add(Me.GroupPanel1)
-        Me.tabFigureSet.Controls.Add(Me.sls_angle)
-        Me.tabFigureSet.Controls.Add(Me.Label7)
-        Me.tabFigureSet.Controls.Add(Me.btnHelp)
-        Me.tabFigureSet.Controls.Add(Me.btnCancel)
-        Me.tabFigureSet.Controls.Add(Me.btnOK)
-        Me.tabFigureSet.Controls.Add(Me.imgMain)
-        Me.tabFigureSet.Controls.Add(Me.ZoomMain)
-        Me.tabFigureSet.Location = New System.Drawing.Point(4, 23)
-        Me.tabFigureSet.Name = "tabFigureSet"
-        Me.tabFigureSet.Size = New System.Drawing.Size(1016, 701)
-        Me.tabFigureSet.TabIndex = 0
-        Me.tabFigureSet.Text = "Figure setting"
+        Me.tabMeasure.BackColor = System.Drawing.SystemColors.Control
+        Me.tabMeasure.Controls.Add(Me.grpSlices)
+        Me.tabMeasure.Controls.Add(Me.grp_mode01)
+        Me.tabMeasure.Controls.Add(Me.grp_mode02)
+        Me.tabMeasure.Controls.Add(Me.btnMeasure)
+        Me.tabMeasure.Controls.Add(Me.Label6)
+        Me.tabMeasure.Controls.Add(Me.cmb_mode)
+        Me.tabMeasure.Controls.Add(Me.GroupPanel1)
+        Me.tabMeasure.Controls.Add(Me.sls_angle)
+        Me.tabMeasure.Controls.Add(Me.Label7)
+        Me.tabMeasure.Location = New System.Drawing.Point(4, 23)
+        Me.tabMeasure.Name = "tabMeasure"
+        Me.tabMeasure.Size = New System.Drawing.Size(1016, 701)
+        Me.tabMeasure.TabIndex = 0
+        Me.tabMeasure.Text = "Measurement"
         '
         'grp_mode01
         '
@@ -355,7 +369,6 @@ Partial Class NormalForm
         Me.GroupPanel1.Controls.Add(Me.Label5)
         Me.GroupPanel1.Controls.Add(Me.cmb_edge0)
         Me.GroupPanel1.Controls.Add(Me.cmb_edge1)
-        Me.GroupPanel1.Controls.Add(Me.btn_measure)
         Me.GroupPanel1.Controls.Add(Me.cmb_edge2)
         Me.GroupPanel1.Controls.Add(Me.Label1)
         Me.GroupPanel1.Controls.Add(Me.Label2)
@@ -364,9 +377,9 @@ Partial Class NormalForm
         Me.GroupPanel1.Controls.Add(Me.cmb_edge3)
         Me.GroupPanel1.FrameColor = System.Drawing.Color.RoyalBlue
         Me.GroupPanel1.FrameWidth = 2
-        Me.GroupPanel1.Location = New System.Drawing.Point(22, 445)
+        Me.GroupPanel1.Location = New System.Drawing.Point(679, 499)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(334, 184)
+        Me.GroupPanel1.Size = New System.Drawing.Size(327, 154)
         Me.GroupPanel1.TabIndex = 37
         Me.GroupPanel1.TextIdent = ""
         Me.GroupPanel1.TitleColor = System.Drawing.Color.Black
@@ -377,7 +390,7 @@ Partial Class NormalForm
         '
         'Label5
         '
-        Me.Label5.Location = New System.Drawing.Point(94, 11)
+        Me.Label5.Location = New System.Drawing.Point(76, 11)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(237, 14)
         Me.Label5.TabIndex = 32
@@ -411,14 +424,14 @@ Partial Class NormalForm
         Me.cmb_edge1.TabIndex = 26
         Me.cmb_edge1.UnitNo = -1
         '
-        'btn_measure
+        'btnMeasure
         '
-        Me.btn_measure.Location = New System.Drawing.Point(97, 136)
-        Me.btn_measure.Name = "btn_measure"
-        Me.btn_measure.Size = New System.Drawing.Size(203, 30)
-        Me.btn_measure.TabIndex = 31
-        Me.btn_measure.Text = "Measure"
-        Me.btn_measure.UseVisualStyleBackColor = True
+        Me.btnMeasure.Location = New System.Drawing.Point(78, 575)
+        Me.btnMeasure.Name = "btnMeasure"
+        Me.btnMeasure.Size = New System.Drawing.Size(203, 30)
+        Me.btnMeasure.TabIndex = 31
+        Me.btnMeasure.Text = "ReMeasure"
+        Me.btnMeasure.UseVisualStyleBackColor = True
         '
         'cmb_edge2
         '
@@ -520,120 +533,7 @@ Partial Class NormalForm
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(320, 30)
         Me.Label7.TabIndex = 34
-        Me.Label7.Text = "It takes 3 sec (!) for 640x480 px image and just 5 degree checks!"
-        '
-        'btnHelp
-        '
-        Me.btnHelp.BorderColor = System.Drawing.Color.Empty
-        Me.btnHelp.ButtonStyle = FZ_CustomControl.ButtonStyle.Push
-        Me.btnHelp.DataIdent = ""
-        Me.btnHelp.DataType = FZ_CustomControl.DATATYPE.None
-        Me.btnHelp.DropDownMenu = Nothing
-        Me.btnHelp.Font = New System.Drawing.Font("MS Gothic", 10.0!)
-        Me.btnHelp.Icon = Nothing
-        Me.btnHelp.IconDisabled = Nothing
-        Me.btnHelp.ImageDisabled = CType(resources.GetObject("btnHelp.ImageDisabled"), System.Drawing.Image)
-        Me.btnHelp.ImageEnabledOFF = CType(resources.GetObject("btnHelp.ImageEnabledOFF"), System.Drawing.Image)
-        Me.btnHelp.ImageEnabledON = CType(resources.GetObject("btnHelp.ImageEnabledON"), System.Drawing.Image)
-        Me.btnHelp.Location = New System.Drawing.Point(3, 659)
-        Me.btnHelp.Name = "btnHelp"
-        Me.btnHelp.RefreshWindow = Nothing
-        Me.btnHelp.Size = New System.Drawing.Size(80, 40)
-        Me.btnHelp.StopChangeEvent = True
-        Me.btnHelp.TabIndex = 21
-        Me.btnHelp.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnHelp.TextIdent = ""
-        Me.btnHelp.TransparentBackground = False
-        Me.btnHelp.UnitNo = -1
-        '
-        'btnCancel
-        '
-        Me.btnCancel.BorderColor = System.Drawing.Color.Empty
-        Me.btnCancel.ButtonStyle = FZ_CustomControl.ButtonStyle.Push
-        Me.btnCancel.DataIdent = ""
-        Me.btnCancel.DataType = FZ_CustomControl.DATATYPE.None
-        Me.btnCancel.DropDownMenu = Nothing
-        Me.btnCancel.Font = New System.Drawing.Font("MS Gothic", 10.0!)
-        Me.btnCancel.Icon = Nothing
-        Me.btnCancel.IconDisabled = Nothing
-        Me.btnCancel.ImageDisabled = CType(resources.GetObject("btnCancel.ImageDisabled"), System.Drawing.Image)
-        Me.btnCancel.ImageEnabledOFF = CType(resources.GetObject("btnCancel.ImageEnabledOFF"), System.Drawing.Image)
-        Me.btnCancel.ImageEnabledON = CType(resources.GetObject("btnCancel.ImageEnabledON"), System.Drawing.Image)
-        Me.btnCancel.Location = New System.Drawing.Point(287, 659)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.RefreshWindow = Nothing
-        Me.btnCancel.Size = New System.Drawing.Size(80, 40)
-        Me.btnCancel.StopChangeEvent = True
-        Me.btnCancel.TabIndex = 20
-        Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnCancel.TextIdent = ""
-        Me.btnCancel.TransparentBackground = False
-        Me.btnCancel.UnitNo = -1
-        '
-        'btnOK
-        '
-        Me.btnOK.BorderColor = System.Drawing.Color.Empty
-        Me.btnOK.ButtonStyle = FZ_CustomControl.ButtonStyle.Push
-        Me.btnOK.DataIdent = ""
-        Me.btnOK.DataType = FZ_CustomControl.DATATYPE.None
-        Me.btnOK.DropDownMenu = Nothing
-        Me.btnOK.Font = New System.Drawing.Font("MS Gothic", 10.0!)
-        Me.btnOK.Icon = Nothing
-        Me.btnOK.IconDisabled = Nothing
-        Me.btnOK.ImageDisabled = CType(resources.GetObject("btnOK.ImageDisabled"), System.Drawing.Image)
-        Me.btnOK.ImageEnabledOFF = CType(resources.GetObject("btnOK.ImageEnabledOFF"), System.Drawing.Image)
-        Me.btnOK.ImageEnabledON = CType(resources.GetObject("btnOK.ImageEnabledON"), System.Drawing.Image)
-        Me.btnOK.Location = New System.Drawing.Point(201, 659)
-        Me.btnOK.Name = "btnOK"
-        Me.btnOK.RefreshWindow = Nothing
-        Me.btnOK.Size = New System.Drawing.Size(80, 40)
-        Me.btnOK.StopChangeEvent = True
-        Me.btnOK.TabIndex = 19
-        Me.btnOK.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnOK.TextIdent = ""
-        Me.btnOK.TransparentBackground = False
-        Me.btnOK.UnitNo = -1
-        '
-        'imgMain
-        '
-        Me.imgMain.BackColor = System.Drawing.Color.Black
-        Me.imgMain.DrawColor = System.Drawing.Color.Green
-        Me.imgMain.DrawWidth = 2
-        Me.imgMain.FrameColor = System.Drawing.Color.LightBlue
-        Me.imgMain.FrameVisible = False
-        Me.imgMain.FrameWidth = CType(2UI, UInteger)
-        Me.imgMain.Image = Nothing
-        Me.imgMain.ImageGraphic = Nothing
-        Me.imgMain.Location = New System.Drawing.Point(368, 5)
-        Me.imgMain.magnification = 1.0R
-        Me.imgMain.Name = "imgMain"
-        Me.imgMain.origin = New System.Drawing.Point(0, 0)
-        Me.imgMain.Size = New System.Drawing.Size(640, 480)
-        Me.imgMain.subNo = 0
-        Me.imgMain.TabIndex = 17
-        Me.imgMain.throughDisp = False
-        Me.imgMain.TransparentBackground = True
-        Me.imgMain.unitNo = -1
-        Me.imgMain.ZoomPosX = 0
-        Me.imgMain.ZoomPosY = 0
-        Me.imgMain.ZoomRate = 100.0R
-        '
-        'ZoomMain
-        '
-        Me.ZoomMain.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.ZoomMain.DataIdent = ""
-        Me.ZoomMain.DataType = FZ_CustomControl.DATATYPE.None
-        Me.ZoomMain.Font = New System.Drawing.Font("MS Gothic", 10.0!)
-        Me.ZoomMain.ImageWindow = Me.imgMain
-        Me.ZoomMain.Location = New System.Drawing.Point(368, 499)
-        Me.ZoomMain.Name = "ZoomMain"
-        Me.ZoomMain.RefreshWindow = Me.imgMain
-        Me.ZoomMain.Size = New System.Drawing.Size(290, 130)
-        Me.ZoomMain.StopChangeEvent = True
-        Me.ZoomMain.TabIndex = 18
-        Me.ZoomMain.TextIdent = ""
-        Me.ZoomMain.TransparentBackground = True
-        Me.ZoomMain.UnitNo = -1
+        Me.Label7.Text = "It takes ~3 sec (!) for 640x480 px image and just 5 degree checks!"
         '
         'colorSet
         '
@@ -653,7 +553,6 @@ Partial Class NormalForm
         Me.colorSet.GB = 0
         Me.colorSet.GG = 0
         Me.colorSet.GR = 0
-        Me.colorSet.ImageWindow = Me.imgMain
         Me.colorSet.Location = New System.Drawing.Point(35, 43)
         Me.colorSet.Name = "colorSet"
         Me.colorSet.R = 0
@@ -705,7 +604,6 @@ Partial Class NormalForm
         Me.rdoColorIN.DataType = FZ_CustomControl.DATATYPE.UnitData
         Me.rdoColorIN.Location = New System.Drawing.Point(35, 469)
         Me.rdoColorIN.Name = "rdoColorIN"
-        Me.rdoColorIN.RefreshWindow = Me.imgMain
         Me.rdoColorIN.Size = New System.Drawing.Size(78, 21)
         Me.rdoColorIN.TabIndex = 3
         Me.rdoColorIN.TabStop = True
@@ -721,7 +619,6 @@ Partial Class NormalForm
         Me.rdoColorOUT.DataType = FZ_CustomControl.DATATYPE.UnitData
         Me.rdoColorOUT.Location = New System.Drawing.Point(148, 469)
         Me.rdoColorOUT.Name = "rdoColorOUT"
-        Me.rdoColorOUT.RefreshWindow = Me.imgMain
         Me.rdoColorOUT.Size = New System.Drawing.Size(92, 21)
         Me.rdoColorOUT.TabIndex = 4
         Me.rdoColorOUT.Text = "Color OUT"
@@ -738,7 +635,6 @@ Partial Class NormalForm
         Me.stdsetReference.DataIdentPosY = ""
         Me.stdsetReference.DataType = FZ_CustomControl.DATATYPE.UnitData
         Me.stdsetReference.DecimalDigits = 0
-        Me.stdsetReference.ImageWindow = Me.imgMain
         Me.stdsetReference.Interval = 100
         Me.stdsetReference.Location = New System.Drawing.Point(13, 41)
         Me.stdsetReference.MaxX = 9999.0R
@@ -759,6 +655,362 @@ Partial Class NormalForm
         Me.stdsetReference.TransparentBackground = True
         Me.stdsetReference.UnitNo = -1
         '
+        'grpSlices
+        '
+        Me.grpSlices.Controls.Add(Me.lblSlicesWidth)
+        Me.grpSlices.Controls.Add(Me.nmbSlicesWidth)
+        Me.grpSlices.Controls.Add(Me.lblSlicesHeight)
+        Me.grpSlices.Controls.Add(Me.nmbSlicesHeight)
+        Me.grpSlices.Controls.Add(Me.lblSlicesCols)
+        Me.grpSlices.Controls.Add(Me.nmbSlicesCols)
+        Me.grpSlices.Controls.Add(Me.chbSlicesEnable)
+        Me.grpSlices.Controls.Add(Me.lblSlicesType)
+        Me.grpSlices.Controls.Add(Me.cmbSlicesType)
+        Me.grpSlices.Controls.Add(Me.lblSlicesRows)
+        Me.grpSlices.Controls.Add(Me.nmbSlicesRows)
+        Me.grpSlices.FrameColor = System.Drawing.Color.RoyalBlue
+        Me.grpSlices.FrameWidth = 2
+        Me.grpSlices.Location = New System.Drawing.Point(22, 367)
+        Me.grpSlices.Name = "grpSlices"
+        Me.grpSlices.Size = New System.Drawing.Size(323, 194)
+        Me.grpSlices.TabIndex = 43
+        Me.grpSlices.TextIdent = ""
+        Me.grpSlices.TitleColor = System.Drawing.Color.Black
+        Me.grpSlices.TitleFont = New System.Drawing.Font("MS Gothic", 10.0!)
+        Me.grpSlices.TitleText = "Slices"
+        Me.grpSlices.TransparentBackground = False
+        '
+        'lblSlicesRows
+        '
+        Me.lblSlicesRows.AutoSize = True
+        Me.lblSlicesRows.Location = New System.Drawing.Point(40, 84)
+        Me.lblSlicesRows.Name = "lblSlicesRows"
+        Me.lblSlicesRows.Size = New System.Drawing.Size(42, 14)
+        Me.lblSlicesRows.TabIndex = 39
+        Me.lblSlicesRows.Text = "Rows:"
+        '
+        'nmbSlicesRows
+        '
+        Me.nmbSlicesRows.BackColor = System.Drawing.Color.White
+        Me.nmbSlicesRows.DataIdent = ""
+        Me.nmbSlicesRows.DataType = FZ_CustomControl.DATATYPE.None
+        Me.nmbSlicesRows.DecimalDigits = 0
+        Me.nmbSlicesRows.Enabled = False
+        Me.nmbSlicesRows.Font = New System.Drawing.Font("MS Gothic", 10.0!)
+        Me.nmbSlicesRows.ForeColor = System.Drawing.Color.Black
+        Me.nmbSlicesRows.Location = New System.Drawing.Point(183, 78)
+        Me.nmbSlicesRows.MaxValue = 1024.0R
+        Me.nmbSlicesRows.Measurement = 1.0R
+        Me.nmbSlicesRows.MinValue = 1.0R
+        Me.nmbSlicesRows.Name = "nmbSlicesRows"
+        Me.nmbSlicesRows.RefreshWindow = Nothing
+        Me.nmbSlicesRows.Size = New System.Drawing.Size(120, 20)
+        Me.nmbSlicesRows.StopChangeEvent = True
+        Me.nmbSlicesRows.TabIndex = 38
+        Me.nmbSlicesRows.Text = "NumericBox1"
+        Me.nmbSlicesRows.TextIdent = ""
+        Me.nmbSlicesRows.TransparentBackground = False
+        Me.nmbSlicesRows.UnitNo = -1
+        Me.nmbSlicesRows.Value = 1.0R
+        '
+        'lblSlicesType
+        '
+        Me.lblSlicesType.Location = New System.Drawing.Point(40, 54)
+        Me.lblSlicesType.Name = "lblSlicesType"
+        Me.lblSlicesType.Size = New System.Drawing.Size(42, 18)
+        Me.lblSlicesType.TabIndex = 42
+        Me.lblSlicesType.Text = "Type:"
+        '
+        'cmbSlicesType
+        '
+        Me.cmbSlicesType.DataIdent = ""
+        Me.cmbSlicesType.DataType = FZ_CustomControl.DATATYPE.None
+        Me.cmbSlicesType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSlicesType.Enabled = False
+        Me.cmbSlicesType.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.cmbSlicesType.Font = New System.Drawing.Font("MS Gothic", 10.0!)
+        Me.cmbSlicesType.FormattingEnabled = True
+        Me.cmbSlicesType.Items.AddRange(New Object() {"Cols and rows", "Width and height"})
+        Me.cmbSlicesType.Location = New System.Drawing.Point(100, 51)
+        Me.cmbSlicesType.Name = "cmbSlicesType"
+        Me.cmbSlicesType.RefreshWindow = Nothing
+        Me.cmbSlicesType.Size = New System.Drawing.Size(203, 21)
+        Me.cmbSlicesType.TabIndex = 43
+        Me.cmbSlicesType.UnitNo = -1
+        '
+        'chbSlicesEnable
+        '
+        Me.chbSlicesEnable.AutoSize = True
+        Me.chbSlicesEnable.DataIdent = ""
+        Me.chbSlicesEnable.DataType = FZ_CustomControl.DATATYPE.None
+        Me.chbSlicesEnable.Font = New System.Drawing.Font("MS Gothic", 10.0!)
+        Me.chbSlicesEnable.Location = New System.Drawing.Point(14, 30)
+        Me.chbSlicesEnable.Name = "chbSlicesEnable"
+        Me.chbSlicesEnable.RefreshWindow = Nothing
+        Me.chbSlicesEnable.Size = New System.Drawing.Size(68, 18)
+        Me.chbSlicesEnable.TabIndex = 44
+        Me.chbSlicesEnable.Text = "Enable"
+        Me.chbSlicesEnable.TextIdent = ""
+        Me.chbSlicesEnable.UnitNo = -1
+        Me.chbSlicesEnable.UseVisualStyleBackColor = True
+        Me.chbSlicesEnable.ValueOff = 0
+        Me.chbSlicesEnable.ValueOn = 1
+        '
+        'lblSlicesCols
+        '
+        Me.lblSlicesCols.AutoSize = True
+        Me.lblSlicesCols.Location = New System.Drawing.Point(40, 110)
+        Me.lblSlicesCols.Name = "lblSlicesCols"
+        Me.lblSlicesCols.Size = New System.Drawing.Size(63, 14)
+        Me.lblSlicesCols.TabIndex = 46
+        Me.lblSlicesCols.Text = "Columns:"
+        '
+        'nmbSlicesCols
+        '
+        Me.nmbSlicesCols.BackColor = System.Drawing.Color.White
+        Me.nmbSlicesCols.DataIdent = ""
+        Me.nmbSlicesCols.DataType = FZ_CustomControl.DATATYPE.None
+        Me.nmbSlicesCols.DecimalDigits = 0
+        Me.nmbSlicesCols.Enabled = False
+        Me.nmbSlicesCols.Font = New System.Drawing.Font("MS Gothic", 10.0!)
+        Me.nmbSlicesCols.ForeColor = System.Drawing.Color.Black
+        Me.nmbSlicesCols.Location = New System.Drawing.Point(183, 104)
+        Me.nmbSlicesCols.MaxValue = 1024.0R
+        Me.nmbSlicesCols.Measurement = 1.0R
+        Me.nmbSlicesCols.MinValue = 1.0R
+        Me.nmbSlicesCols.Name = "nmbSlicesCols"
+        Me.nmbSlicesCols.RefreshWindow = Nothing
+        Me.nmbSlicesCols.Size = New System.Drawing.Size(120, 20)
+        Me.nmbSlicesCols.StopChangeEvent = True
+        Me.nmbSlicesCols.TabIndex = 45
+        Me.nmbSlicesCols.Text = "NumericBox1"
+        Me.nmbSlicesCols.TextIdent = ""
+        Me.nmbSlicesCols.TransparentBackground = False
+        Me.nmbSlicesCols.UnitNo = -1
+        Me.nmbSlicesCols.Value = 1.0R
+        '
+        'lblSlicesWidth
+        '
+        Me.lblSlicesWidth.AutoSize = True
+        Me.lblSlicesWidth.Location = New System.Drawing.Point(40, 162)
+        Me.lblSlicesWidth.Name = "lblSlicesWidth"
+        Me.lblSlicesWidth.Size = New System.Drawing.Size(49, 14)
+        Me.lblSlicesWidth.TabIndex = 50
+        Me.lblSlicesWidth.Text = "Width:"
+        '
+        'nmbSlicesWidth
+        '
+        Me.nmbSlicesWidth.BackColor = System.Drawing.Color.White
+        Me.nmbSlicesWidth.DataIdent = ""
+        Me.nmbSlicesWidth.DataType = FZ_CustomControl.DATATYPE.None
+        Me.nmbSlicesWidth.DecimalDigits = 0
+        Me.nmbSlicesWidth.Enabled = False
+        Me.nmbSlicesWidth.Font = New System.Drawing.Font("MS Gothic", 10.0!)
+        Me.nmbSlicesWidth.ForeColor = System.Drawing.Color.Black
+        Me.nmbSlicesWidth.Location = New System.Drawing.Point(183, 156)
+        Me.nmbSlicesWidth.MaxValue = 32767.0R
+        Me.nmbSlicesWidth.Measurement = 5.0R
+        Me.nmbSlicesWidth.MinValue = 5.0R
+        Me.nmbSlicesWidth.Name = "nmbSlicesWidth"
+        Me.nmbSlicesWidth.RefreshWindow = Nothing
+        Me.nmbSlicesWidth.Size = New System.Drawing.Size(120, 20)
+        Me.nmbSlicesWidth.StopChangeEvent = True
+        Me.nmbSlicesWidth.TabIndex = 49
+        Me.nmbSlicesWidth.Text = "NumericBox3"
+        Me.nmbSlicesWidth.TextIdent = ""
+        Me.nmbSlicesWidth.TransparentBackground = False
+        Me.nmbSlicesWidth.UnitNo = -1
+        Me.nmbSlicesWidth.Value = 5.0R
+        '
+        'lblSlicesHeight
+        '
+        Me.lblSlicesHeight.AutoSize = True
+        Me.lblSlicesHeight.Location = New System.Drawing.Point(40, 136)
+        Me.lblSlicesHeight.Name = "lblSlicesHeight"
+        Me.lblSlicesHeight.Size = New System.Drawing.Size(56, 14)
+        Me.lblSlicesHeight.TabIndex = 48
+        Me.lblSlicesHeight.Text = "Height:"
+        '
+        'nmbSlicesHeight
+        '
+        Me.nmbSlicesHeight.BackColor = System.Drawing.Color.White
+        Me.nmbSlicesHeight.DataIdent = ""
+        Me.nmbSlicesHeight.DataType = FZ_CustomControl.DATATYPE.None
+        Me.nmbSlicesHeight.DecimalDigits = 0
+        Me.nmbSlicesHeight.Enabled = False
+        Me.nmbSlicesHeight.Font = New System.Drawing.Font("MS Gothic", 10.0!)
+        Me.nmbSlicesHeight.ForeColor = System.Drawing.Color.Black
+        Me.nmbSlicesHeight.Location = New System.Drawing.Point(183, 130)
+        Me.nmbSlicesHeight.MaxValue = 32767.0R
+        Me.nmbSlicesHeight.Measurement = 5.0R
+        Me.nmbSlicesHeight.MinValue = 5.0R
+        Me.nmbSlicesHeight.Name = "nmbSlicesHeight"
+        Me.nmbSlicesHeight.RefreshWindow = Nothing
+        Me.nmbSlicesHeight.Size = New System.Drawing.Size(120, 20)
+        Me.nmbSlicesHeight.StopChangeEvent = True
+        Me.nmbSlicesHeight.TabIndex = 47
+        Me.nmbSlicesHeight.Text = "NumericBox1"
+        Me.nmbSlicesHeight.TextIdent = ""
+        Me.nmbSlicesHeight.TransparentBackground = False
+        Me.nmbSlicesHeight.UnitNo = -1
+        Me.nmbSlicesHeight.Value = 5.0R
+        '
+        'tabRegion
+        '
+        Me.tabRegion.BackColor = System.Drawing.SystemColors.Control
+        Me.tabRegion.Controls.Add(Me.btnHelp)
+        Me.tabRegion.Controls.Add(Me.btnCancel)
+        Me.tabRegion.Controls.Add(Me.btnOK)
+        Me.tabRegion.Controls.Add(Me.fscRegion)
+        Me.tabRegion.Controls.Add(Me.imgMain)
+        Me.tabRegion.Controls.Add(Me.ZoomMain)
+        Me.tabRegion.Location = New System.Drawing.Point(4, 23)
+        Me.tabRegion.Name = "tabRegion"
+        Me.tabRegion.Size = New System.Drawing.Size(1016, 701)
+        Me.tabRegion.TabIndex = 6
+        Me.tabRegion.Text = "Region"
+        '
+        'imgMain
+        '
+        Me.imgMain.BackColor = System.Drawing.Color.Black
+        Me.imgMain.DrawColor = System.Drawing.Color.Green
+        Me.imgMain.DrawWidth = 2
+        Me.imgMain.FrameColor = System.Drawing.Color.LightBlue
+        Me.imgMain.FrameVisible = False
+        Me.imgMain.FrameWidth = CType(2UI, UInteger)
+        Me.imgMain.Image = Nothing
+        Me.imgMain.ImageGraphic = Nothing
+        Me.imgMain.Location = New System.Drawing.Point(366, 7)
+        Me.imgMain.magnification = 1.0R
+        Me.imgMain.Name = "imgMain"
+        Me.imgMain.origin = New System.Drawing.Point(0, 0)
+        Me.imgMain.Size = New System.Drawing.Size(640, 480)
+        Me.imgMain.subNo = 0
+        Me.imgMain.TabIndex = 19
+        Me.imgMain.throughDisp = False
+        Me.imgMain.TransparentBackground = True
+        Me.imgMain.unitNo = -1
+        Me.imgMain.ZoomPosX = 0
+        Me.imgMain.ZoomPosY = 0
+        Me.imgMain.ZoomRate = 100.0R
+        '
+        'ZoomMain
+        '
+        Me.ZoomMain.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ZoomMain.DataIdent = ""
+        Me.ZoomMain.DataType = FZ_CustomControl.DATATYPE.None
+        Me.ZoomMain.Font = New System.Drawing.Font("MS Gothic", 10.0!)
+        Me.ZoomMain.ImageWindow = Me.imgMain
+        Me.ZoomMain.Location = New System.Drawing.Point(366, 493)
+        Me.ZoomMain.Name = "ZoomMain"
+        Me.ZoomMain.RefreshWindow = Me.imgMain
+        Me.ZoomMain.Size = New System.Drawing.Size(290, 130)
+        Me.ZoomMain.StopChangeEvent = True
+        Me.ZoomMain.TabIndex = 20
+        Me.ZoomMain.TextIdent = ""
+        Me.ZoomMain.TransparentBackground = True
+        Me.ZoomMain.UnitNo = -1
+        '
+        'fscRegion
+        '
+        Me.fscRegion.CautionMessage = "Please register the figure."
+        Me.fscRegion.CautionMessageFont = New System.Drawing.Font("MS Gothic", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.fscRegion.CircleMode = 0
+        Me.fscRegion.DataIdent = ""
+        Me.fscRegion.DataIdentNum_Figure = -1
+        Me.fscRegion.DataType = FZ_CustomControl.DATATYPE.None
+        Me.fscRegion.DeleteDisable = False
+        Me.fscRegion.ExclusionMode = True
+        Me.fscRegion.FigureKind = 0
+        Me.fscRegion.FigureMax = 100
+        Me.fscRegion.ImageWindow = Me.imgMain
+        Me.fscRegion.LineArrowMode = False
+        Me.fscRegion.Location = New System.Drawing.Point(8, 7)
+        Me.fscRegion.Name = "fscRegion"
+        Me.fscRegion.NotOnlyFigureEnabled = False
+        Me.fscRegion.OrNotEnabled = True
+        Me.fscRegion.RefreshWindow = Nothing
+        Me.fscRegion.SelectedIndex = -1
+        Me.fscRegion.Size = New System.Drawing.Size(320, 420)
+        Me.fscRegion.StopChangeEvent = True
+        Me.fscRegion.TabIndex = 21
+        Me.fscRegion.Text = "FigureSetControl1"
+        Me.fscRegion.TextIdent = ""
+        Me.fscRegion.TransparentBackground = True
+        Me.fscRegion.UnitNo = -1
+        '
+        'btnHelp
+        '
+        Me.btnHelp.BorderColor = System.Drawing.Color.Empty
+        Me.btnHelp.ButtonStyle = FZ_CustomControl.ButtonStyle.Push
+        Me.btnHelp.DataIdent = ""
+        Me.btnHelp.DataType = FZ_CustomControl.DATATYPE.None
+        Me.btnHelp.DropDownMenu = Nothing
+        Me.btnHelp.Font = New System.Drawing.Font("MS Gothic", 10.0!)
+        Me.btnHelp.Icon = Nothing
+        Me.btnHelp.IconDisabled = Nothing
+        Me.btnHelp.ImageDisabled = CType(resources.GetObject("btnHelp.ImageDisabled"), System.Drawing.Image)
+        Me.btnHelp.ImageEnabledOFF = CType(resources.GetObject("btnHelp.ImageEnabledOFF"), System.Drawing.Image)
+        Me.btnHelp.ImageEnabledON = CType(resources.GetObject("btnHelp.ImageEnabledON"), System.Drawing.Image)
+        Me.btnHelp.Location = New System.Drawing.Point(8, 652)
+        Me.btnHelp.Name = "btnHelp"
+        Me.btnHelp.RefreshWindow = Nothing
+        Me.btnHelp.Size = New System.Drawing.Size(80, 40)
+        Me.btnHelp.StopChangeEvent = True
+        Me.btnHelp.TabIndex = 24
+        Me.btnHelp.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnHelp.TextIdent = ""
+        Me.btnHelp.TransparentBackground = False
+        Me.btnHelp.UnitNo = -1
+        '
+        'btnCancel
+        '
+        Me.btnCancel.BorderColor = System.Drawing.Color.Empty
+        Me.btnCancel.ButtonStyle = FZ_CustomControl.ButtonStyle.Push
+        Me.btnCancel.DataIdent = ""
+        Me.btnCancel.DataType = FZ_CustomControl.DATATYPE.None
+        Me.btnCancel.DropDownMenu = Nothing
+        Me.btnCancel.Font = New System.Drawing.Font("MS Gothic", 10.0!)
+        Me.btnCancel.Icon = Nothing
+        Me.btnCancel.IconDisabled = Nothing
+        Me.btnCancel.ImageDisabled = CType(resources.GetObject("btnCancel.ImageDisabled"), System.Drawing.Image)
+        Me.btnCancel.ImageEnabledOFF = CType(resources.GetObject("btnCancel.ImageEnabledOFF"), System.Drawing.Image)
+        Me.btnCancel.ImageEnabledON = CType(resources.GetObject("btnCancel.ImageEnabledON"), System.Drawing.Image)
+        Me.btnCancel.Location = New System.Drawing.Point(292, 652)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.RefreshWindow = Nothing
+        Me.btnCancel.Size = New System.Drawing.Size(80, 40)
+        Me.btnCancel.StopChangeEvent = True
+        Me.btnCancel.TabIndex = 23
+        Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnCancel.TextIdent = ""
+        Me.btnCancel.TransparentBackground = False
+        Me.btnCancel.UnitNo = -1
+        '
+        'btnOK
+        '
+        Me.btnOK.BorderColor = System.Drawing.Color.Empty
+        Me.btnOK.ButtonStyle = FZ_CustomControl.ButtonStyle.Push
+        Me.btnOK.DataIdent = ""
+        Me.btnOK.DataType = FZ_CustomControl.DATATYPE.None
+        Me.btnOK.DropDownMenu = Nothing
+        Me.btnOK.Font = New System.Drawing.Font("MS Gothic", 10.0!)
+        Me.btnOK.Icon = Nothing
+        Me.btnOK.IconDisabled = Nothing
+        Me.btnOK.ImageDisabled = CType(resources.GetObject("btnOK.ImageDisabled"), System.Drawing.Image)
+        Me.btnOK.ImageEnabledOFF = CType(resources.GetObject("btnOK.ImageEnabledOFF"), System.Drawing.Image)
+        Me.btnOK.ImageEnabledON = CType(resources.GetObject("btnOK.ImageEnabledON"), System.Drawing.Image)
+        Me.btnOK.Location = New System.Drawing.Point(206, 652)
+        Me.btnOK.Name = "btnOK"
+        Me.btnOK.RefreshWindow = Nothing
+        Me.btnOK.Size = New System.Drawing.Size(80, 40)
+        Me.btnOK.StopChangeEvent = True
+        Me.btnOK.TabIndex = 22
+        Me.btnOK.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnOK.TextIdent = ""
+        Me.btnOK.TransparentBackground = False
+        Me.btnOK.UnitNo = -1
+        '
         'NormalForm
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -770,14 +1022,17 @@ Partial Class NormalForm
         Me.tabOutputParameter.ResumeLayout(False)
         Me.grpTotalJudge.ResumeLayout(False)
         Me.tcNormal.ResumeLayout(False)
-        Me.tabFigureSet.ResumeLayout(False)
-        Me.tabFigureSet.PerformLayout()
+        Me.tabMeasure.ResumeLayout(False)
+        Me.tabMeasure.PerformLayout()
         Me.grp_mode01.ResumeLayout(False)
         Me.grp_mode01.PerformLayout()
         Me.grp_mode02.ResumeLayout(False)
         Me.grp_mode02.PerformLayout()
         Me.GroupPanel1.ResumeLayout(False)
         Me.GroupPanel1.PerformLayout()
+        Me.grpSlices.ResumeLayout(False)
+        Me.grpSlices.PerformLayout()
+        Me.tabRegion.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -789,12 +1044,7 @@ Partial Class NormalForm
     Friend WithEvents rdoDo As FZ_CustomControl.RadioButtonEx
     Friend WithEvents coordinateSet As FZ_CustomControl.CoordinateSetControl
     Friend WithEvents tcNormal As TabControl
-    Friend WithEvents tabFigureSet As TabPage
-    Friend WithEvents btnHelp As FZ_CustomControl.ImageButton
-    Friend WithEvents btnCancel As FZ_CustomControl.ImageButton
-    Friend WithEvents btnOK As FZ_CustomControl.ImageButton
-    Friend WithEvents imgMain As FZ_CustomControl.SetupImageWindow
-    Friend WithEvents ZoomMain As FZ_CustomControl.ZoomBrowser
+    Friend WithEvents tabMeasure As TabPage
     Friend WithEvents colorSet As FZ_CustomControl.ColorSetControl
     Friend WithEvents cbColorSpecification As FZ_CustomControl.CheckBoxEx
     Friend WithEvents LabelEx3 As FZ_CustomControl.LabelEx
@@ -809,7 +1059,7 @@ Partial Class NormalForm
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents btn_measure As Button
+    Friend WithEvents btnMeasure As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents sls_angle As FZ_CustomControl.SliderSet
@@ -824,5 +1074,24 @@ Partial Class NormalForm
     Friend WithEvents grp_mode01 As FZ_CustomControl.GroupPanel
     Friend WithEvents Label11 As Label
     Friend WithEvents nmb_mode01_angle_skip As FZ_CustomControl.NumericBox
+    Friend WithEvents grpSlices As FZ_CustomControl.GroupPanel
+    Friend WithEvents chbSlicesEnable As FZ_CustomControl.CheckBoxEx
+    Friend WithEvents lblSlicesType As Label
+    Friend WithEvents cmbSlicesType As FZ_CustomControl.ComboBoxEx
+    Friend WithEvents lblSlicesRows As Label
+    Friend WithEvents nmbSlicesRows As FZ_CustomControl.NumericBox
+    Friend WithEvents lblSlicesWidth As Label
+    Friend WithEvents nmbSlicesWidth As FZ_CustomControl.NumericBox
+    Friend WithEvents lblSlicesHeight As Label
+    Friend WithEvents nmbSlicesHeight As FZ_CustomControl.NumericBox
+    Friend WithEvents lblSlicesCols As Label
+    Friend WithEvents nmbSlicesCols As FZ_CustomControl.NumericBox
+    Friend WithEvents tabRegion As TabPage
+    Friend WithEvents fscRegion As FZ_CustomControl.FigureSetControl
+    Friend WithEvents imgMain As FZ_CustomControl.SetupImageWindow
+    Friend WithEvents ZoomMain As FZ_CustomControl.ZoomBrowser
+    Friend WithEvents btnHelp As FZ_CustomControl.ImageButton
+    Friend WithEvents btnCancel As FZ_CustomControl.ImageButton
+    Friend WithEvents btnOK As FZ_CustomControl.ImageButton
 End Class
 

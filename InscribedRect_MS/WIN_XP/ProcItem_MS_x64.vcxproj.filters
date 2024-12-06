@@ -97,6 +97,9 @@
     <ClInclude Include="..\Common\AP1CommStruct.h">
       <Filter>Header Files\Common</Filter>
     </ClInclude>
+    <ClInclude Include="..\Common\UnitInscribedRectConst.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ProcItem_MS.rc">

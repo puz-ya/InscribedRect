@@ -27,34 +27,7 @@ Public Class NormalForm
         Me.tsbNormal.TabControl = Me.tcNormal
         Me.tcNormal.Update()
 
-        '//TODO: Send positions of selected Scan Edge Pos unit in the Scene flow.
-        SetUnitData(20, 2)
-        SetUnitData(21, 3)
-        SetUnitData(22, 4)
-        SetUnitData(23, 5)
-
-        '//TODO: Set mode to default, zero-based index
-        Dim mode As Double
-        GetUnitData(200, mode)
-        cmb_mode.SelectedIndex = mode
-        ShowHideModeGroups(mode)
-
-        '//Set angle back to the slider from the unit on each onLoad
-        Dim angle As Double
-        GetUnitData(201, angle)
-        sls_angle.Measurement = angle
-
-        Dim mode01_angle_skip As Double
-        GetUnitData(300, mode01_angle_skip)
-        nmb_mode01_angle_skip.Value = mode01_angle_skip
-
-        Dim mode02_angle_skip As Double
-        GetUnitData(400, mode02_angle_skip)
-        nmb_mode02_angle_skip.Value = mode02_angle_skip
-
-        Dim mode02_scale_step As Double
-        GetUnitData(401, mode02_scale_step)
-        nmb_mode02_scale_step.Value = mode02_scale_step
+        GetSetControlsState()
 
     End Sub
 
@@ -91,8 +64,7 @@ Public Class NormalForm
         Me.Close()
     End Sub
 
-
-	Private Sub tcNormal_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tcNormal.SelectedIndexChanged
+    Private Sub tcNormal_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tcNormal.SelectedIndexChanged
 
 		Dim index As Integer = Me.tcNormal.SelectedIndex
 
@@ -105,6 +77,81 @@ Public Class NormalForm
         End If
 
     End Sub
+
+    Private Sub GetSetControlsState()
+
+        '//TODO: Send positions of selected Scan Edge Pos unit in the Scene flow.
+        SetUnitData(20, 2)
+        SetUnitData(21, 3)
+        SetUnitData(22, 4)
+        SetUnitData(23, 5)
+
+        '//TODO: Set mode to default, zero-based index
+        Dim mode As Double
+        GetUnitData(200, mode)
+        cmb_mode.SelectedIndex = mode
+        ShowHideModeGroups(mode)
+
+        '//Set angle back to the slider from the unit on each onLoad
+        Dim angle As Double
+        GetUnitData(201, angle)
+        sls_angle.Measurement = angle
+
+        Dim mode01_angle_skip As Double
+        GetUnitData(300, mode01_angle_skip)
+        nmb_mode01_angle_skip.Value = mode01_angle_skip
+
+        Dim mode02_angle_skip As Double
+        GetUnitData(400, mode02_angle_skip)
+        nmb_mode02_angle_skip.Value = mode02_angle_skip
+
+        Dim mode02_scale_step As Double
+        GetUnitData(401, mode02_scale_step)
+        nmb_mode02_scale_step.Value = mode02_scale_step
+
+        '//Slices
+        GetSetSlicesControlsState()
+
+    End Sub
+
+    Private Sub GetSetSlicesControlsState()
+
+        Dim sliceEnabled As Double
+        GetUnitData(210, sliceEnabled)
+        If sliceEnabled = 1 Then
+            chbSlicesEnable.Checked = True
+        Else
+            chbSlicesEnable.Checked = False
+        End If
+
+        Dim sliceType As Double
+        GetUnitData(211, sliceType)
+        If sliceType >= 1 And sliceType <= 2 Then
+            cmbSlicesType.SelectedIndex = CInt(sliceType - 1)
+        Else
+            cmbSlicesType.SelectedIndex = 0
+        End If
+
+        GetSetCmbSlicesType()
+
+        Dim sliceRows As Double
+        GetUnitData(212, sliceRows)
+        nmbSlicesRows.Measurement = sliceRows
+
+        Dim sliceCols As Double
+        GetUnitData(213, sliceCols)
+        nmbSlicesCols.Measurement = sliceCols
+
+        Dim sliceHeight As Double
+        GetUnitData(214, sliceHeight)
+        nmbSlicesHeight.Measurement = sliceHeight
+
+        Dim sliceWidth As Double
+        GetUnitData(215, sliceWidth)
+        nmbSlicesWidth.Measurement = sliceWidth
+
+    End Sub
+
 
     Private Sub sls_angle_ValueChanged(sender As Object, e As EventArgs) Handles sls_angle.ValueChanged
 
@@ -173,5 +220,99 @@ Public Class NormalForm
         SetUnitData(401, nmb_mode02_scale_step.Value)
 
     End Sub
+
+    Private Sub chbSlicesEnable_CheckedChanged(sender As Object, e As EventArgs) Handles chbSlicesEnable.CheckedChanged
+
+        If chbSlicesEnable.Checked = True Then
+            SetUnitData(210, 1)
+
+            GrpSlicesState(True)
+
+        Else
+            SetUnitData(210, 0)
+
+            GrpSlicesState(False)
+
+        End If
+
+    End Sub
+
+    Private Sub GrpSlicesState(state As Boolean)
+
+        cmbSlicesType.Enabled = state
+
+        GetSetCmbSlicesType()
+
+
+    End Sub
+
+    Private Sub GetSetCmbSlicesType()
+
+        If cmbSlicesType.Enabled = True And cmbSlicesType.SelectedIndex = 0 Then
+            nmbSlicesRows.Enabled = True
+            nmbSlicesCols.Enabled = True
+            nmbSlicesHeight.Enabled = False
+            nmbSlicesWidth.Enabled = False
+        Else
+            nmbSlicesRows.Enabled = False
+            nmbSlicesCols.Enabled = False
+        End If
+
+        If cmbSlicesType.Enabled = True And cmbSlicesType.SelectedIndex = 1 Then
+            nmbSlicesHeight.Enabled = True
+            nmbSlicesWidth.Enabled = True
+            nmbSlicesRows.Enabled = False
+            nmbSlicesCols.Enabled = False
+        Else
+            nmbSlicesHeight.Enabled = False
+            nmbSlicesWidth.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub cmbSlicesType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSlicesType.SelectedIndexChanged
+
+        '//SliceType starts with 1
+        SetUnitData(211, cmbSlicesType.SelectedIndex + 1)
+
+        GetSetCmbSlicesType()
+
+    End Sub
+
+    Private Sub nmbSlicesRows_ValueChanged(sender As Object, e As EventArgs) Handles nmbSlicesRows.ValueChanged
+
+        SetUnitData(212, nmbSlicesRows.Measurement)
+
+    End Sub
+
+    Private Sub nmbSlicesCols_ValueChanged(sender As Object, e As EventArgs) Handles nmbSlicesCols.ValueChanged
+
+        SetUnitData(213, nmbSlicesCols.Measurement)
+
+    End Sub
+
+    Private Sub nmbSlicesHeight_ValueChanged(sender As Object, e As EventArgs) Handles nmbSlicesHeight.ValueChanged
+
+        SetUnitData(214, nmbSlicesHeight.Measurement)
+
+    End Sub
+
+    Private Sub nmbSlicesWidth_ValueChanged(sender As Object, e As EventArgs) Handles nmbSlicesWidth.ValueChanged
+
+        SetUnitData(215, nmbSlicesWidth.Measurement)
+
+    End Sub
+
+    Private Sub btnMeasure_Click(sender As Object, e As EventArgs) Handles btnMeasure.Click
+
+        SetUnitData(999, 7)
+
+        '//Update controls because Slice values could change
+        GetSetControlsState()
+
+    End Sub
+
+
+
 End Class
 

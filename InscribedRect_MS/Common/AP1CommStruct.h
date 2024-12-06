@@ -8,3 +8,8 @@ struct RGB_STR {
 	int g;
 	int b;
 };
+
+enum SLICE_TYPES {
+	SLICE_ROWS_COLS = 1,
+	SLICE_HEIGHT_WIDTH = 2
+};

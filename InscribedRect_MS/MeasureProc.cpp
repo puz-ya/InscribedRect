@@ -121,7 +121,10 @@ int CLASSNAME::MeasureProcSub(ProcUnit *ptrProcUnit)
 		return(-2);
 	}
 
-	int	judge = JUDGE_OK;
+	ptrMeasureData->pointsOfSliceLeft.clear();
+	ptrMeasureData->pointsOfSliceTop.clear();
+	ptrMeasureData->pointsOfSliceRight.clear();
+	ptrMeasureData->pointsOfSliceBottom.clear();
 
 	int sizeX = ptrInImage->sizeX;
 	int sizeY = ptrInImage->sizeY;
@@ -150,10 +153,220 @@ int CLASSNAME::MeasureProcSub(ProcUnit *ptrProcUnit)
 			MeasureMode01(ptrProcUnit, ptrInImage);
 	}	
 
+	if (ptrSetupData->sliceEnabled == 1) {
+
+		//The order of points is bottomLeft, topLeft, topRight, bottomRight.
+		if (ptrSetupData->sliceType == SLICE_ROWS_COLS) {
+
+			if (ptrSetupData->sliceRows > SIZE1024) {
+				ptrSetupData->sliceRows = SIZE1024;
+			}
+			if (ptrSetupData->sliceRows < 1) {
+				ptrSetupData->sliceRows = 1;
+			}
+			if (ptrSetupData->sliceCols > SIZE1024) {
+				ptrSetupData->sliceCols = SIZE1024;
+			}
+			if (ptrSetupData->sliceCols < 1) {
+				ptrSetupData->sliceCols = 1;
+			}
+
+			ptrSetupData->sliceHeight = ptrMeasureData->height / ptrSetupData->sliceRows;
+
+			//check height of the slice
+			if (ptrSetupData->sliceHeight < MIN_SLICE_HEIGHT) {
+				ptrSetupData->sliceHeight = MIN_SLICE_HEIGHT;
+				//recalc number of Columns back
+				ptrSetupData->sliceRows = ptrMeasureData->height / ptrSetupData->sliceHeight;
+
+			}
+			/*
+			if (ptrMeasureData->height % ptrSetupData->sliceHeight != 0) {
+
+				//if we have some modulus -> increase number of Rows/Cols by 1 (last smaller part till vertex)
+				ptrSetupData->sliceRows++;
+			}
+			//*/
+
+			ptrSetupData->sliceWidth = ptrMeasureData->width / ptrSetupData->sliceCols;
+			//check width of the slice
+			if (ptrSetupData->sliceWidth < MIN_SLICE_WIDTH) {
+				ptrSetupData->sliceWidth = MIN_SLICE_WIDTH;
+				//recalc number of Columns back
+				ptrSetupData->sliceCols = ptrMeasureData->width / ptrSetupData->sliceWidth;
+
+			}
+			/*
+			if (ptrMeasureData->width % ptrSetupData->sliceWidth != 0) {
+				ptrSetupData->sliceCols++;
+			}
+			//*/
+
+		}
+		else if (ptrSetupData->sliceType == SLICE_HEIGHT_WIDTH){
+
+			if (ptrSetupData->sliceHeight > MAX_OY - 1) {
+				ptrSetupData->sliceHeight = MAX_OY - 1;
+			}
+			if (ptrSetupData->sliceHeight < MIN_SLICE_HEIGHT) {
+				ptrSetupData->sliceHeight = MIN_SLICE_HEIGHT;
+			}
+			if (ptrSetupData->sliceWidth > MAX_OX - 1) {
+				ptrSetupData->sliceWidth = MAX_OX - 1;
+			}
+			if (ptrSetupData->sliceWidth < MIN_SLICE_WIDTH) {
+				ptrSetupData->sliceWidth = MIN_SLICE_WIDTH;
+			}
+
+			ptrSetupData->sliceRows = ptrMeasureData->height / ptrSetupData->sliceHeight;
+
+			
+			if (ptrMeasureData->height / ptrSetupData->sliceHeight == 0) {
+
+				//if Main Rect height << user's sliceHeight -> reset sliceRows & sliceHeight
+				ptrSetupData->sliceRows = 1;
+				ptrSetupData->sliceHeight = ptrMeasureData->height;
+
+			}
+			if (ptrMeasureData->height % ptrSetupData->sliceHeight != 0) {
+
+				//if we have some modulus -> increase number of Rows/Cols by 1 (last smaller part till vertex)
+				ptrSetupData->sliceRows++;
+			}
+
+			ptrSetupData->sliceCols = ptrMeasureData->width / ptrSetupData->sliceWidth;
+
+			if (ptrMeasureData->width / ptrSetupData->sliceWidth == 0) {
+				ptrSetupData->sliceCols = 1;
+				ptrSetupData->sliceWidth = ptrMeasureData->width;
+			}
+			if (ptrMeasureData->width % ptrSetupData->sliceWidth != 0) {
+				ptrSetupData->sliceCols++;
+			}
+
+		}
+
+		//Check left & right sides of rectangle (parallel)
+			/*
+			double mLeft = 0.0; //inclanation
+			if (x[0] != x[1]) {
+				mLeft = (x[0] - x[1]) / (y[0] - y[1]);
+			}
+			double mRight = 0.0; //inclanation
+			if (x[2] != x[3]) {
+				mRight = (x[2] - x[3]) / (y[2] - y[3]);
+			}
+			//*/
+
+		ptrMeasureData->pointsOfSliceLeft = linePointsSlice(
+			ptrMeasureData->vert[0].x, ptrMeasureData->vert[0].y,
+			ptrMeasureData->vert[1].x, ptrMeasureData->vert[1].y,
+			ptrSetupData->sliceHeight, ptrSetupData->sliceType);
+
+		ptrMeasureData->pointsOfSliceTop = linePointsSlice(
+			ptrMeasureData->vert[1].x, ptrMeasureData->vert[1].y,
+			ptrMeasureData->vert[2].x, ptrMeasureData->vert[2].y,
+			ptrSetupData->sliceWidth, ptrSetupData->sliceType);
+
+		ptrMeasureData->pointsOfSliceRight = linePointsSlice(
+			ptrMeasureData->vert[3].x, ptrMeasureData->vert[3].y,
+			ptrMeasureData->vert[2].x, ptrMeasureData->vert[2].y,
+			ptrSetupData->sliceHeight, ptrSetupData->sliceType);
+
+		ptrMeasureData->pointsOfSliceBottom = linePointsSlice(
+			ptrMeasureData->vert[0].x, ptrMeasureData->vert[0].y,
+			ptrMeasureData->vert[3].x, ptrMeasureData->vert[3].y,
+			ptrSetupData->sliceWidth, ptrSetupData->sliceType);
+
+		//SliceEnabled End
+
+	}
+
 	//ptrProcUnit->SetMeasureImage(0, 0);
 
 	return NORMAL;
 }
+
+vector<cv::Point> CLASSNAME::linePoints(int x0, int y0, int x1, int y1)
+{
+	vector<Point> pointsOfLine;
+
+	int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+	int dy = abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+	int err = (dx > dy ? dx : -dy) / 2, e2;
+
+	for (;;)
+	{
+		pointsOfLine.push_back(Point(x0, y0));
+		if (x0 == x1 && y0 == y1) break;
+		e2 = err;
+		if (e2 > -dx)
+		{
+			err -= dy;
+			x0 += sx;
+		}
+		if (e2 < dy)
+		{
+			err += dx;
+			y0 += sy;
+		}
+	}
+	return pointsOfLine;
+}
+
+vector<cv::Point> CLASSNAME::linePointsSlice(int x0, int y0, int x1, int y1, int sliceDist, int sliceType)
+{
+	//SETUPDATA* ptrSetupData = ptrProcUnit->GetSetupData();
+	//MEASUREDATA* ptrMeasureData = ptrProcUnit->GetMeasureData();
+
+	vector<Point> pointsOfLine;
+	vector<Point> pointsOfLineSlice;	//only selected points
+
+	int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+	int dy = abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+	int err = (dx > dy ? dx : -dy) / 2, e2;
+
+	int xSlice = x0, ySlice = y0;
+
+	//move x0, y0 along the line
+	//xSlice, ySlice will follow
+
+	for (;;)
+	{
+		pointsOfLine.push_back(Point(x0, y0));
+
+		if (abs(Dist(x0, xSlice, y0, ySlice) - sliceDist) < 1) {
+			pointsOfLineSlice.push_back(Point(xSlice, ySlice));
+			xSlice = x0;
+			ySlice = y0;
+		}
+
+		if (x0 == x1 && y0 == y1) {
+			if ((xSlice != x0 || ySlice != y0) && (sliceType != SLICE_ROWS_COLS)) {
+				//keep one previous point (distance was not enough)
+				pointsOfLineSlice.push_back(Point(xSlice, ySlice));
+			}
+			//keep the final point
+			pointsOfLineSlice.push_back(Point(x0, y0));
+
+			break;
+		}
+
+		e2 = err;
+		if (e2 > -dx)
+		{
+			err -= dy;
+			x0 += sx;
+		}
+		if (e2 < dy)
+		{
+			err += dx;
+			y0 += sy;
+		}
+	}
+	return pointsOfLineSlice;
+}
+
 
 /// <summary>
 /// Mode00 just for the tests. It's too slow for any production line.
@@ -288,14 +501,12 @@ void CLASSNAME::MeasureMode01(ProcUnit* ptrProcUnit, IMAGE* ptrInImage) {
 	end = steady_clock::now();
 	cout << "largestRectInNonConvexPoly(img)" << (double)duration_cast<milliseconds>(end - begin).count() << endl;
 
-	/** returns 4 vertices of the rectangle
-	@param pts The points array for storing rectangle vertices. The order is bottomLeft, topLeft, topRight, bottomRight.
-	*/
-	//Point2f pts[4];
+	// Store 4 vertices of the rectangle
 	for (int i = 0; i < 4; i++) {
 		ptrMeasureData->vert[i] = Point2f(0.f, 0.f);
 	}
 
+	// The order is bottomLeft, topLeft, topRight, bottomRight.
 	retRect.points(ptrMeasureData->vert);
 
 	ptrMeasureData->width = retRect.size.width;
@@ -590,11 +801,12 @@ void CLASSNAME::MeasureMode02(ProcUnit* ptrProcUnit, IMAGE* ptrInImage) {
 		}
 	}
 
-	//Point2f pts[4];
+	// Store 4 vertices of the rectangle
 	for (int i = 0; i < 4; i++) {
 		ptrMeasureData->vert[i] = Point2f(0.f, 0.f);
 	}
-	//r.points(pts);
+
+	//The order is bottomLeft, topLeft, topRight, bottomRight.
 	bestRect.points(ptrMeasureData->vert);
 
 	ptrMeasureData->width = bestRect.size.width;

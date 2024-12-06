@@ -86,8 +86,64 @@ int CLASSNAME::MeasureDispG(ProcUnit *ptrProcUnit, int subNo, ImageWindow *ptrIm
 		y[i] = ptrMeasureData->vert[i].y;
 	}
 
+	//200, 100, 0 - orange/brown
 	ptrImageWindow->SetDrawStyle(PS_SOLID, 3, RGB(200, 100, 0));
 	ptrImageWindow->DrawPolygon(4, x, y);
+
+	if (ptrSetupData->sliceEnabled == 1) {
+
+		//The order of points is bottomLeft, topLeft, topRight, bottomRight.
+		
+		int r = 5;	//radius of circles
+
+		//Left + Right sides of main rectangle
+		int sizeLeftRight = ptrMeasureData->pointsOfSliceLeft.size();
+		for (int i = 1; i < sizeLeftRight - 1; i++) {
+			//200, 100, 0 - orange/brown
+			ptrImageWindow->SetDrawStyle(PS_SOLID, 3, RGB(200, 100, 0));
+
+			ptrImageWindow->DrawCircle(
+				ptrMeasureData->pointsOfSliceLeft[i].x,
+				ptrMeasureData->pointsOfSliceLeft[i].y,
+				r);
+
+			ptrImageWindow->DrawCircle(
+				ptrMeasureData->pointsOfSliceRight[i].x,
+				ptrMeasureData->pointsOfSliceRight[i].y,
+				r);
+
+			//180, 150, 0 - golden
+			ptrImageWindow->SetDrawStyle(PS_DASH, 1, RGB(180, 150, 0));
+
+			ptrImageWindow->DrawLine(ptrMeasureData->pointsOfSliceLeft[i].x, ptrMeasureData->pointsOfSliceLeft[i].y,
+				ptrMeasureData->pointsOfSliceRight[i].x, ptrMeasureData->pointsOfSliceRight[i].y);
+		}
+
+		//Top + Bottom sides of main rectangle
+		int sizeTopBottom = ptrMeasureData->pointsOfSliceTop.size();
+		for (int i = 1; i < sizeTopBottom - 1; i++) {
+
+			//200, 100, 0 - orange/brown
+			ptrImageWindow->SetDrawStyle(PS_SOLID, 3, RGB(200, 100, 0));
+
+			ptrImageWindow->DrawCircle(
+				ptrMeasureData->pointsOfSliceTop[i].x,
+				ptrMeasureData->pointsOfSliceTop[i].y,
+				r);
+
+			ptrImageWindow->DrawCircle(
+				ptrMeasureData->pointsOfSliceBottom[i].x,
+				ptrMeasureData->pointsOfSliceBottom[i].y,
+				r);
+
+			//180, 150, 0 - golden
+			ptrImageWindow->SetDrawStyle(PS_DASH, 1, RGB(180, 150, 0));
+
+			ptrImageWindow->DrawLine(ptrMeasureData->pointsOfSliceTop[i].x, ptrMeasureData->pointsOfSliceTop[i].y,
+				ptrMeasureData->pointsOfSliceBottom[i].x, ptrMeasureData->pointsOfSliceBottom[i].y);
+		}
+
+	}
 
 	return(NORMAL);
 }
@@ -121,6 +177,13 @@ int CLASSNAME::MeasureDispT(ProcUnit *ptrProcUnit, int subNo, TextWindow *ptrTex
 
 	ptrTextWindow->DrawTextW(judge, TRUE, _T("Max angle: %d"), ptrSetupData->max_angle);
 	
+	if (ptrSetupData->mode == 0) {
+		ptrTextWindow->DrawTextW(judge, TRUE, _T("Angle skip: %d"), ptrSetupData->mode01_skip_angle);
+	}
+	if (ptrSetupData->mode == 1) {
+		ptrTextWindow->DrawTextW(judge, TRUE, _T("Angle skip: %d"), ptrSetupData->mode02_skip_angle);
+	}
+
 	ptrTextWindow->DrawTextW(judge, TRUE, _T("--- --- --- --- ---"));
 
 	ptrTextWindow->DrawTextW(judge, TRUE, _T("Point 1: (%.0f ; %.0f)"), ptrMeasureData->vert[0].x, ptrMeasureData->vert[0].y);
@@ -154,6 +217,28 @@ int CLASSNAME::MeasureDispT(ProcUnit *ptrProcUnit, int subNo, TextWindow *ptrTex
 
 	ptrTextWindow->DrawTextW(judge, TRUE, _T("--- --- --- --- ---"));
 
+	ptrTextWindow->DrawTextW(judge, TRUE, _T("Slice enabled: %d"), ptrSetupData->sliceEnabled);
+	
+	if (ptrSetupData->sliceEnabled == 1) {
+
+		if (ptrSetupData->sliceType == SLICE_ROWS_COLS) {
+			ptrTextWindow->DrawTextW(judge, TRUE, _T("Slice type: Rows & Cols"));
+		}
+		else {
+			ptrTextWindow->DrawTextW(judge, TRUE, _T("Slice type: Height & Width"));
+		}
+
+		ptrTextWindow->DrawTextW(judge, TRUE, _T("Slice rows: %d"), ptrSetupData->sliceRows);
+
+		ptrTextWindow->DrawTextW(judge, TRUE, _T("Slice cols: %d"), ptrSetupData->sliceCols);
+
+		ptrTextWindow->DrawTextW(judge, TRUE, _T("Slice height: %d"), ptrSetupData->sliceHeight);
+
+		ptrTextWindow->DrawTextW(judge, TRUE, _T("Slice width: %d"), ptrSetupData->sliceWidth);
+
+	}
+
+	ptrTextWindow->DrawTextW(judge, TRUE, _T("--- --- --- --- ---"));
 	return(NORMAL);
 }
 

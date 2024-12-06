@@ -52,11 +52,6 @@ int CLASSNAME::SetupDisp(ProcUnit *ptrProcUnit, int subNo, ImageWindow *ptrImage
 {
 	SETUPDATA	*ptrSetupData = ptrProcUnit->GetSetupData();
 	IMAGE	*image = ptrProcUnit->GetMeasureImage(0);
-	
-	/*if (image == NULL) {
-		ptrImageWindow->ImageDisp(image);
-		return -1;
-	}*/
 
 	ptrProcUnit->SetMeasureProcMask(TRUE);
 	//int ret = MeasureProcSub(ptrProcUnit);
@@ -66,11 +61,6 @@ int CLASSNAME::SetupDisp(ProcUnit *ptrProcUnit, int subNo, ImageWindow *ptrImage
 	}
 
 	ptrProcUnit->SetMeasureProcMask(FALSE);
-
-	/*if (ret == NORMAL) {
-		image = ptrProcUnit->GetImageData(0);
-	}
-	ptrImageWindow->ImageDisp(image);*/
 
 	return(NORMAL);
 }
