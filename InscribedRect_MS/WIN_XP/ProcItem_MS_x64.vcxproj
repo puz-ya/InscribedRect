@@ -164,6 +164,10 @@ Copy "$(ProjectDir)..\..\ICON\OK\*.png" "..\..\..\..\Release_x64\ICON\OK"
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\AssignProc.cpp" />
+    <ClCompile Include="..\Common\AP1CommonConstStruct.cpp" />
+    <ClCompile Include="..\Common\AP1CommonFunc.cpp" />
+    <ClCompile Include="..\Common\UnitInscribedRectConstStruct.cpp" />
+    <ClCompile Include="..\Common\UnitInscribedRectFunc.cpp" />
     <ClCompile Include="..\FigureData.cpp" />
     <ClCompile Include="..\FigureUpdate.cpp" />
     <ClCompile Include="..\ItemInit.cpp" />
@@ -188,10 +192,10 @@ Copy "$(ProjectDir)..\..\ICON\OK\*.png" "..\..\..\..\Release_x64\ICON\OK"
     <None Include="res\ProcItem_MS.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Common\AP1CommConst.h" />
-    <ClInclude Include="..\Common\AP1CommFunc.h" />
-    <ClInclude Include="..\Common\AP1CommStruct.h" />
-    <ClInclude Include="..\Common\UnitInscribedRectConst.h" />
+    <ClInclude Include="..\Common\AP1CommonConstStruct.h" />
+    <ClInclude Include="..\Common\AP1CommonFunc.h" />
+    <ClInclude Include="..\Common\UnitInscribedRectConstStruct.h" />
+    <ClInclude Include="..\Common\UnitInscribedRectFunc.h" />
     <ClInclude Include="..\ItemDefs.h" />
     <ClInclude Include="ProcItem_MS.h" />
     <ClInclude Include="Resource.h" />

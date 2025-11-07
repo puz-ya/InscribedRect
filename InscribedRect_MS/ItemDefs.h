@@ -21,11 +21,10 @@
 #include <vector>
 #include <tchar.h>
 
-#include "Common/AP1CommConst.h"
-#include "Common/AP1CommFunc.h"
-#include "Common/AP1CommStruct.h"
+#include "Common/AP1CommonConstStruct.h"
+#include "Common/AP1CommonFunc.h"
 
-#include "Common/UnitInscribedRectConst.h"
+#include "Common/UnitInscribedRectConstStruct.h"
 
 //using namespace cv;	//not here
 

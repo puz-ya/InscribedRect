@@ -47,7 +47,7 @@ static const UDATA unitParam[] = {
 	//Output tab has DEFAULT idents [101-103] for all FH / FHV units
 	{101, _T("outputCoordinate")},	//0: after scroll, 1: before scroll
 	{102, _T("calibration")},		//0: OFF, 1: ON
-	{103, _T("overallJudge")},
+	{103, _T("overallJudge")},		//0: ON, 1: OFF (inveterted in MeasureProc)
 	{103, _T("OJ")},
 
 

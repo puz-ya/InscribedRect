@@ -1,5 +1,9 @@
 #pragma once
 
+/**/
+// --- --- --- CONSTANTS --- --- ---
+/**/
+
 // Simulation flag status (for debug)
 const int SIMULATOR_FLAG = 0;
 
@@ -42,3 +46,16 @@ const int SIZE1024 = 1024;	//replace num with searchable const 1024
 const int SIZE2048 = 2048;	//replace num with searchable const 2048
 const int SIZE4096 = 4096;	//replace num with searchable const 4096
 const int SIZE8192 = 8192;	//replace num with searchable const 8192
+
+/**/
+// --- --- --- STRUCTURES --- --- ---
+/**/
+
+/// <summary>
+/// RBG structure for colors and styles
+/// </summary>
+struct RGB_STR {
+	int r;
+	int g;
+	int b;
+};

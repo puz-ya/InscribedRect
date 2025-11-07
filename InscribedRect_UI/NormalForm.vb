@@ -1,3 +1,5 @@
+
+
 Public Class NormalForm
 
     ''' <summary>
@@ -66,11 +68,11 @@ Public Class NormalForm
 
     Private Sub tcNormal_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tcNormal.SelectedIndexChanged
 
-		Dim index As Integer = Me.tcNormal.SelectedIndex
+        Dim index As Integer = Me.tcNormal.SelectedIndex
 
-		If (index >= 0) Then
-			Me.tcNormal.TabPages(index).Controls.Add(Me.btnOK)
-			Me.tcNormal.TabPages(index).Controls.Add(Me.btnCancel)
+        If (index >= 0) Then
+            Me.tcNormal.TabPages(index).Controls.Add(Me.btnOK)
+            Me.tcNormal.TabPages(index).Controls.Add(Me.btnCancel)
             Me.tcNormal.TabPages(index).Controls.Add(Me.btnHelp)
             Me.tcNormal.TabPages(index).Controls.Add(Me.imgMain)
             Me.tcNormal.TabPages(index).Controls.Add(Me.ZoomMain)

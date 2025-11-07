@@ -16,6 +16,9 @@
     <Filter Include="Header Files\Common">
       <UniqueIdentifier>{b55ed872-bfb9-4203-8aaf-64d1ba901d85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Common">
+      <UniqueIdentifier>{ee1a0f50-52f9-4a4e-9cad-2a89b09349db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\AssignProc.cpp">
@@ -66,6 +69,18 @@
     <ClCompile Include="..\UnitData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common\AP1CommonConstStruct.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\AP1CommonFunc.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\UnitInscribedRectConstStruct.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\UnitInscribedRectFunc.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ProcItem_MS.def">
@@ -88,16 +103,16 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\AP1CommFunc.h">
+    <ClInclude Include="..\Common\AP1CommonFunc.h">
       <Filter>Header Files\Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\AP1CommConst.h">
+    <ClInclude Include="..\Common\AP1CommonConstStruct.h">
       <Filter>Header Files\Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\AP1CommStruct.h">
+    <ClInclude Include="..\Common\UnitInscribedRectConstStruct.h">
       <Filter>Header Files\Common</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\UnitInscribedRectConst.h">
+    <ClInclude Include="..\Common\UnitInscribedRectFunc.h">
       <Filter>Header Files\Common</Filter>
     </ClInclude>
   </ItemGroup>
